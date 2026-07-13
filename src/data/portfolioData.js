@@ -1,10 +1,10 @@
 import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython,
-  FaGit, FaDatabase, FaLinux, FaCode
+  FaGit, FaDatabase, FaCode
 } from 'react-icons/fa';
 import {
   SiTailwindcss, SiExpress, SiMongodb, SiPostgresql,
-  SiTypescript, SiRedis, SiPostman, SiSocketdotio, SiCplusplus
+  SiRedis, SiPostman, SiSocketdotio, SiCplusplus
 } from 'react-icons/si';
 
 /* =============================================
@@ -25,8 +25,8 @@ export const personalInfo = {
   /* =============================================
      REPLACE: Add your actual URLs below
      ============================================= */
-  github: 'https://github.com/aayushkumar3238',
-  linkedin: 'https://linkedin.com/in/aayushkumar3238',
+  github: 'https://github.com/Aayush3238',
+  linkedin: 'https://www.linkedin.com/in/aayush-kumar-0b17a1316/',
   twitter: '',  /* add if available */
   portfolio: '',
 };
@@ -133,8 +133,8 @@ export const projects = [
       'Secure REST APIs with JWT, Google OAuth 2.0, API key authentication, rate limiting, and input validation',
       'React dashboard with batch uploads, analytics, folder management, image search, and real-time upload progress',
     ],
-    github: 'https://github.com/aayushkumar3238/pixelflow',
-    live: '',  /* REPLACE: Add live demo URL if available */
+    github: 'https://github.com/Aayush3238/pixelflow',
+    live: 'https://pixel-flow-ashy.vercel.app/dashboard',
     image: null,
   },
   {
@@ -146,8 +146,8 @@ export const projects = [
       'Cloud-based media pipeline using Cloudinary with automatic compression and responsive srcset generation',
       'Custom session store, geospatial search, and buy-request workflows with PostgreSQL and Prisma',
     ],
-    github: 'https://github.com/aayushkumar3238/homehive',
-    live: '',  /* REPLACE: Add live demo URL if available */
+    github: 'https://github.com/Aayush3238/homehive',
+    live: 'https://homehive-w3xm.onrender.com/',
     image: null,
   },
 ];
@@ -193,5 +193,18 @@ export const achievements = [
   },
 ];
 
-export const certifications = [];  /* REPLACE: Add your certifications here */
-export const codingProfiles = [];  /* REPLACE: Add LeetCode, CodeChef, etc. here */
+export const stats = [
+  { label: 'Projects Completed', value: 5, suffix: '+' },
+  { label: 'Technologies', value: 20, suffix: '+' },
+  { label: 'Months Experience', value: 6, suffix: '+' },
+  { label: 'GitHub Contributions', value: 500, suffix: '+' },
+];
+
+export const techMarquee = [
+  'React.js', 'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL',
+  'Redis', 'Socket.IO', 'TypeScript', 'Python', 'C++',
+  'Tailwind CSS', 'Prisma', 'Git', 'REST APIs', 'JWT',
+];
+
+export const certifications = [];
+export const codingProfiles = [];

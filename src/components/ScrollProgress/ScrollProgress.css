@@ -1,0 +1,17 @@
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6c63ff, #e942f5, #6c63ff);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+  transform-origin: 0%;
+  z-index: 10001;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

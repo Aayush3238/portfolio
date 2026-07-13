@@ -38,10 +38,14 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="about-image-card">
-              {/* REPLACE: Put your about image in public/ and use: <img src="/about.jpg" alt="About" /> */}
               <div className="about-image-placeholder">
-                <span>🧑‍💻</span>
-                <p>Aayush Kumar</p>
+                <div className="about-avatar-ring">
+                  <div className="about-avatar-inner">
+                    <span className="about-avatar-emoji">🧑‍💻</span>
+                  </div>
+                </div>
+                <p className="about-avatar-name">Aayush Kumar</p>
+                <p className="about-avatar-role">Full Stack Developer</p>
               </div>
             </div>
 
@@ -79,8 +83,11 @@ export default function About() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
+                    whileHover={{ x: 6, scale: 1.01 }}
                   >
-                    <Icon className="about-highlight-icon" />
+                    <div className="about-highlight-icon-wrapper">
+                      <Icon className="about-highlight-icon" />
+                    </div>
                     <div>
                       <h4>{item.title}</h4>
                       <p>{item.desc}</p>

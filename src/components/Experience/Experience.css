@@ -28,11 +28,12 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   transition: var(--transition);
+  cursor: default;
 }
 
 .timeline-item:hover {
   border-color: var(--primary);
-  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.1);
 }
 
 .timeline-dot {
@@ -46,6 +47,11 @@
   color: var(--primary);
   font-size: 1.1rem;
   flex-shrink: 0;
+}
+
+.timeline-dot-edu {
+  background: rgba(233, 66, 245, 0.12);
+  color: #e942f5;
 }
 
 .timeline-content h4 {
@@ -123,18 +129,28 @@
   background: var(--bg-card);
   border: 1px solid var(--border);
   transition: var(--transition);
+  cursor: default;
 }
 
 .achievement-card:hover {
   border-color: var(--primary);
-  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.1);
+}
+
+.achievement-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(108, 99, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .achievement-icon {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: var(--primary);
-  margin-top: 2px;
-  flex-shrink: 0;
 }
 
 .achievement-card h4 {

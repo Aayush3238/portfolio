@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCheck } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
 import { personalInfo } from '../../data/portfolioData';
 import './Contact.css';
@@ -9,6 +9,7 @@ export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,11 +17,11 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* =============================================
-       TODO: Add backend functionality later
-       ============================================= */
-    alert('Thank you for your message! (Form submission will be implemented later.)');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    }, 3000);
   };
 
   return (
@@ -57,7 +58,9 @@ export default function Contact() {
 
             <div className="contact-details">
               <a href={`mailto:${personalInfo.email}`} className="contact-detail-item">
-                <FaEnvelope className="contact-detail-icon" />
+                <div className="contact-detail-icon-wrapper">
+                  <FaEnvelope className="contact-detail-icon" />
+                </div>
                 <div>
                   <p className="contact-detail-label">Email</p>
                   <p className="contact-detail-value">{personalInfo.email}</p>
@@ -65,7 +68,9 @@ export default function Contact() {
               </a>
 
               <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="contact-detail-item">
-                <FaLinkedin className="contact-detail-icon" />
+                <div className="contact-detail-icon-wrapper">
+                  <FaLinkedin className="contact-detail-icon" />
+                </div>
                 <div>
                   <p className="contact-detail-label">LinkedIn</p>
                   <p className="contact-detail-value">{personalInfo.linkedin.replace('https://', '')}</p>
@@ -73,7 +78,9 @@ export default function Contact() {
               </a>
 
               <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="contact-detail-item">
-                <FaGithub className="contact-detail-icon" />
+                <div className="contact-detail-icon-wrapper">
+                  <FaGithub className="contact-detail-icon" />
+                </div>
                 <div>
                   <p className="contact-detail-label">GitHub</p>
                   <p className="contact-detail-value">{personalInfo.github.replace('https://', '')}</p>
@@ -81,7 +88,9 @@ export default function Contact() {
               </a>
 
               <div className="contact-detail-item">
-                <FiMapPin className="contact-detail-icon" />
+                <div className="contact-detail-icon-wrapper">
+                  <FiMapPin className="contact-detail-icon" />
+                </div>
                 <div>
                   <p className="contact-detail-label">Location</p>
                   <p className="contact-detail-value">{personalInfo.location}</p>
@@ -150,9 +159,16 @@ export default function Contact() {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary contact-submit">
-              Send Message
-              <FaPaperPlane />
+            <button type="submit" className={`btn btn-primary contact-submit ${submitted ? 'submitted' : ''}`}>
+              {submitted ? (
+                <>
+                  <FaCheck /> Message Sent!
+                </>
+              ) : (
+                <>
+                  Send Message <FaPaperPlane />
+                </>
+              )}
             </button>
           </motion.form>
         </div>

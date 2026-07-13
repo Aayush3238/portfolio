@@ -2,6 +2,8 @@
   padding: 40px 0 24px;
   border-top: 1px solid var(--border);
   background: rgba(15, 15, 26, 0.5);
+  position: relative;
+  z-index: 1;
 }
 
 .footer-content {
@@ -15,6 +17,11 @@
   font-size: 1.3rem;
   font-weight: 800;
   letter-spacing: -0.5px;
+  transition: var(--transition);
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
 }
 
 .footer-links {
@@ -28,10 +35,26 @@
   font-size: 0.9rem;
   color: var(--text-muted);
   transition: var(--transition);
+  position: relative;
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient);
+  transition: width 0.3s ease;
 }
 
 .footer-links a:hover {
   color: var(--primary);
+}
+
+.footer-links a:hover::after {
+  width: 100%;
 }
 
 .footer-socials {
@@ -54,9 +77,11 @@
 }
 
 .footer-social-link:hover {
-  color: var(--primary);
+  color: white;
   border-color: var(--primary);
-  transform: translateY(-2px);
+  background: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
 }
 
 .footer-bottom {
@@ -77,4 +102,10 @@
 
 .footer-heart {
   color: #e942f5;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }

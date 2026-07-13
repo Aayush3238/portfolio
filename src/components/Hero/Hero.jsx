@@ -1,13 +1,61 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiDownload, FiArrowDown } from 'react-icons/fi';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FiArrowRight, FiArrowDown } from 'react-icons/fi';
+import { FaGithub, FaLinkedin, FaEnvelope, FaTwitter } from 'react-icons/fa';
 import { personalInfo, heroIntro } from '../../data/portfolioData';
 import './Hero.css';
+
+const roles = [
+  'Full Stack Web Developer',
+  'Backend Engineer',
+  'React Developer',
+  'Problem Solver',
+  'Software Engineer',
+];
+
+function TypingEffect() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout;
+
+    if (!isDeleting && text === currentRole) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && text === '') {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else {
+      timeout = setTimeout(
+        () => {
+          setText(
+            isDeleting
+              ? currentRole.substring(0, text.length - 1)
+              : currentRole.substring(0, text.length + 1)
+          );
+        },
+        isDeleting ? 40 : 80
+      );
+    }
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, roleIndex]);
+
+  return (
+    <span className="hero-typing-text">
+      {text}
+      <span className="hero-typing-cursor">|</span>
+    </span>
+  );
+}
 
 export default function Hero() {
   return (
     <section id="home" className="hero">
       <div className="hero-bg-gradient" />
+      <div className="hero-bg-gradient-2" />
+      <div className="hero-bg-gradient-3" />
       <div className="container hero-container">
         <motion.div
           className="hero-content"
@@ -15,44 +63,54 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <motion.p
+          <motion.div
             className="hero-greeting"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Hello, I&apos;m
-          </motion.p>
+            <span className="hero-greeting-wave">👋</span>
+            <span>Hello, I&apos;m</span>
+          </motion.div>
 
           <h1 className="hero-name">
-            <span className="gradient-text">{personalInfo.name}</span>
+            <span className="hero-name-gradient">{personalInfo.name}</span>
           </h1>
 
-          <h2 className="hero-role">{personalInfo.role}</h2>
+          <h2 className="hero-role">
+            <TypingEffect />
+          </h2>
 
           <p className="hero-intro">{heroIntro}</p>
 
           <div className="hero-buttons">
-            <a href="#projects" className="btn btn-primary">
+            <a href="#projects" className="btn btn-primary hero-btn-glow">
               View Projects
-              <FiArrowDown />
+              <FiArrowRight />
+            </a>
+            <a href="#contact" className="btn btn-secondary">
+              Contact Me
             </a>
             <a href={personalInfo.resumePath} download className="btn btn-secondary">
-              Download Resume
-              <FiDownload />
+              Resume
             </a>
           </div>
 
           <div className="hero-socials">
-            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hero-social-link">
               <FaGithub />
             </a>
-            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hero-social-link">
               <FaLinkedin />
             </a>
-            <a href={`mailto:${personalInfo.email}`} aria-label="Email">
+            <a href={`mailto:${personalInfo.email}`} aria-label="Email" className="hero-social-link">
               <FaEnvelope />
             </a>
+            {personalInfo.twitter && (
+              <a href={personalInfo.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hero-social-link">
+                <FaTwitter />
+              </a>
+            )}
           </div>
         </motion.div>
 
@@ -62,13 +120,33 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
         >
-          <div className="hero-image-card">
-            <div className="hero-image-placeholder">
-              {/* REPLACE: Put your profile image in public/ folder and use: <img src="/profile.jpg" alt="Profile" /> */}
-              <span>👨‍💻</span>
-              <p>Aayush Kumar</p>
+          <div className="hero-character-area">
+            <div className="hero-orbit-ring" />
+            <div className="hero-floating-tag hero-tag-1">
+              <span>&lt; /&gt;</span>
             </div>
-            <div className="hero-image-ring" />
+            <div className="hero-floating-tag hero-tag-2">
+              <span>{ '{ }' }</span>
+            </div>
+            <div className="hero-floating-tag hero-tag-3">
+              <span>npm run dev</span>
+            </div>
+            <div className="hero-character-placeholder">
+              <div className="hero-code-window">
+                <div className="hero-code-dots">
+                  <span className="dot dot-red" />
+                  <span className="dot dot-yellow" />
+                  <span className="dot dot-green" />
+                </div>
+                <div className="hero-code-content">
+                  <p className="code-line"><span className="code-keyword">const</span> <span className="code-var">developer</span> = {'{'}</p>
+                  <p className="code-line code-indent"><span className="code-key">name</span>: <span className="code-string">"Aayush"</span>,</p>
+                  <p className="code-line code-indent"><span className="code-key">passion</span>: <span className="code-string">"Building"</span>,</p>
+                  <p className="code-line code-indent"><span className="code-key">coffee</span>: <span className="code-bool">true</span></p>
+                  <p className="code-line">{'};'}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -79,8 +157,9 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
       >
-        <a href="#about">
-          <FiArrowDown className="bounce" />
+        <span className="hero-scroll-text">Scroll Down</span>
+        <a href="#about" className="hero-scroll-arrow">
+          <FiArrowDown />
         </a>
       </motion.div>
     </section>

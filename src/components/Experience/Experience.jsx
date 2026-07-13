@@ -39,6 +39,7 @@ export default function Experience() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
+                  whileHover={{ x: 4 }}
                 >
                   <div className="timeline-dot">
                     <FaBriefcase />
@@ -72,7 +73,7 @@ export default function Experience() {
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
                     >
-                      <div className="timeline-dot">
+                      <div className="timeline-dot timeline-dot-edu">
                         <FaGraduationCap />
                       </div>
                       <div className="timeline-content">
@@ -98,8 +99,11 @@ export default function Experience() {
                   initial={{ opacity: 0, x: 30 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                  whileHover={{ x: -4 }}
                 >
-                  <FaTrophy className="achievement-icon" />
+                  <div className="achievement-icon-wrapper">
+                    <FaTrophy className="achievement-icon" />
+                  </div>
                   <div>
                     <h4>{ach.title}</h4>
                     <p>{ach.desc}</p>
@@ -122,7 +126,9 @@ export default function Experience() {
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                     >
-                      <FaAward className="achievement-icon" />
+                      <div className="achievement-icon-wrapper">
+                        <FaAward className="achievement-icon" />
+                      </div>
                       <div>
                         <h4>{cert.title}</h4>
                         <p>{cert.desc}</p>
@@ -145,7 +151,9 @@ export default function Experience() {
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
                     >
-                      <FaAward className="achievement-icon" />
+                      <div className="achievement-icon-wrapper">
+                        <FaAward className="achievement-icon" />
+                      </div>
                       <div>
                         <h4>{cp.title}</h4>
                         <p>{cp.desc}</p>
