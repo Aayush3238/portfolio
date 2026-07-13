@@ -1,27 +1,61 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCheck } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCheck, FaSpinner } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
 import { personalInfo } from '../../data/portfolioData';
 import './Contact.css';
 
+/* =============================================
+   EMAILJS SETUP INSTRUCTIONS:
+   
+   1. Go to https://www.emailjs.com/ and create a free account
+   2. Add an Email Service (Gmail, Outlook, etc.) and note the SERVICE_ID
+   3. Create an Email Template with these variables:
+      - {{from_name}}    → sender's name
+      - {{from_email}}   → sender's email
+      - {{subject}}      → email subject
+      - {{message}}      → email message
+      - {{to_name}}      → your name (Aayush Kumar)
+      Note the TEMPLATE_ID
+   4. Go to Account → API Keys and copy your PUBLIC KEY
+   5. Replace the three values below:
+   ============================================= */
+
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';       // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';     // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';       // e.g. 'abcdef123456'
+
 export default function Contact() {
   const ref = useRef(null);
+  const formRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setStatus('sending');
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus('sent');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
+      setTimeout(() => setStatus('idle'), 4000);
+    } catch (err) {
+      console.error('Email send failed:', err);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -100,6 +134,7 @@ export default function Contact() {
           </motion.div>
 
           <motion.form
+            ref={formRef}
             className="contact-form"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}
@@ -159,12 +194,25 @@ export default function Contact() {
               />
             </div>
 
-            <button type="submit" className={`btn btn-primary contact-submit ${submitted ? 'submitted' : ''}`}>
-              {submitted ? (
+            <button
+              type="submit"
+              className={`btn btn-primary contact-submit ${status === 'sent' ? 'submitted' : ''} ${status === 'error' ? 'error' : ''}`}
+              disabled={status === 'sending'}
+            >
+              {status === 'sending' && (
+                <>
+                  <FaSpinner className="spinner" /> Sending...
+                </>
+              )}
+              {status === 'sent' && (
                 <>
                   <FaCheck /> Message Sent!
                 </>
-              ) : (
+              )}
+              {status === 'error' && (
+                <>Failed. Try Again</>
+              )}
+              {(status === 'idle') && (
                 <>
                   Send Message <FaPaperPlane />
                 </>
