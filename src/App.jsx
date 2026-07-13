@@ -1,7 +1,6 @@
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
-import Stats from './components/Stats/Stats';
 import TechMarquee from './components/TechMarquee/TechMarquee';
 import Skills from './components/Skills/Skills';
 import Projects from './components/Projects/Projects';
@@ -22,7 +21,6 @@ export default function App() {
       <main>
         <Hero />
         <About />
-        <Stats />
         <TechMarquee />
         <Skills />
         <Projects />

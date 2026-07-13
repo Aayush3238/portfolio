@@ -193,13 +193,6 @@ export const achievements = [
   },
 ];
 
-export const stats = [
-  { label: 'Projects Completed', value: 5, suffix: '+' },
-  { label: 'Technologies', value: 20, suffix: '+' },
-  { label: 'Months Experience', value: 6, suffix: '+' },
-  { label: 'GitHub Contributions', value: 500, suffix: '+' },
-];
-
 export const techMarquee = [
   'React.js', 'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL',
   'Redis', 'Socket.IO', 'TypeScript', 'Python', 'C++',
