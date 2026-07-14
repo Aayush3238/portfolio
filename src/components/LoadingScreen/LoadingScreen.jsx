@@ -10,87 +10,98 @@ export default function LoadingScreen({ onComplete }) {
   const laserRef = useRef(null);
   const topHalfRef = useRef(null);
   const bottomHalfRef = useRef(null);
-  const overlayRef = useRef(null);
+  const cutGlowRef = useRef(null);
   const [animationDone, setAnimationDone] = useState(false);
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => {
+          document.body.style.overflow = '';
           setAnimationDone(true);
           onComplete?.();
         }
       });
 
-      // Phase 1: Logo appears with glow build (0s - 0.4s)
+      // Phase 1: Logo appears with glow build
       tl.fromTo(logoRef.current,
         { opacity: 0, scale: 0.8, filter: 'blur(10px)' },
-        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.4, ease: 'power2.out' }
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.45, ease: 'power2.out' }
       );
 
-      // Purple glow builds
       tl.fromTo(glowRef.current,
         { opacity: 0, scale: 0.5 },
         { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' },
         '-=0.3'
       );
 
-      // Slash cyan glow
+      // Slash cyan glow intensifies
       tl.fromTo(slashRef.current,
         { textShadow: '0 0 0px rgba(34, 211, 238, 0)' },
-        { textShadow: '0 0 20px rgba(34, 211, 238, 0.8), 0 0 40px rgba(34, 211, 238, 0.4)', duration: 0.3, ease: 'power2.in' },
+        { textShadow: '0 0 25px rgba(34, 211, 238, 0.9), 0 0 50px rgba(34, 211, 238, 0.5), 0 0 80px rgba(34, 211, 238, 0.2)', duration: 0.35, ease: 'power2.in' },
         '-=0.2'
       );
 
-      // Phase 2: Laser cut (0.4s - 0.7s)
+      // Phase 2: Laser cut slices across the screen
       tl.fromTo(laserRef.current,
-        { opacity: 0, scaleX: 0, rotate: -35 },
-        { opacity: 1, scaleX: 1, rotate: -35, duration: 0.3, ease: 'power3.in' },
-        '+=0.1'
+        { opacity: 0, scaleX: 0 },
+        { opacity: 1, scaleX: 1, duration: 0.25, ease: 'power4.in' },
+        '+=0.08'
       );
 
-      // Flash on laser impact
+      // Cut glow line appears
+      tl.fromTo(cutGlowRef.current,
+        { opacity: 0, scaleX: 0 },
+        { opacity: 1, scaleX: 1, duration: 0.25, ease: 'power4.in' },
+        '<'
+      );
+
+      // Laser fades out
       tl.to(laserRef.current, {
         opacity: 0,
-        duration: 0.15,
+        duration: 0.12,
         ease: 'power2.out'
       });
 
-      // Phase 3: Screen splits (0.7s - 1.1s)
-      // Create the clip-path halves
+      // Phase 3: Screen tears apart along the cut
       tl.to(topHalfRef.current, {
-        y: '-110%',
-        rotation: -2,
-        filter: 'blur(4px)',
-        duration: 0.45,
+        y: '-105%',
+        rotation: -1.5,
+        filter: 'blur(6px)',
+        duration: 0.5,
         ease: 'power3.in'
-      }, '+=0.05');
+      }, '-=0.05');
 
       tl.to(bottomHalfRef.current, {
-        y: '110%',
-        rotation: 2,
-        filter: 'blur(4px)',
-        duration: 0.45,
+        y: '105%',
+        rotation: 1.5,
+        filter: 'blur(6px)',
+        duration: 0.5,
         ease: 'power3.in'
       }, '<');
 
-      // Fade overlay
-      tl.to(overlayRef.current, {
+      // Cut glow lingers then fades
+      tl.to(cutGlowRef.current, {
         opacity: 0,
-        duration: 0.3,
+        duration: 0.4,
         ease: 'power2.out'
-      }, '-=0.3');
+      }, '-=0.4');
 
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      document.body.style.overflow = '';
+    };
   }, [onComplete]);
 
   if (animationDone) return null;
 
   return (
     <div className="paper-cut-loader" ref={containerRef}>
-      {/* The split halves */}
+      {/* Top torn half */}
       <div className="paper-half paper-top" ref={topHalfRef}>
         <div className="paper-half-content">
           <div className="paper-logo" ref={logoRef}>
@@ -101,17 +112,20 @@ export default function LoadingScreen({ onComplete }) {
           </div>
           <div className="paper-glow" ref={glowRef} />
         </div>
+        {/* Torn edge - jagged bottom */}
+        <div className="paper-torn-edge paper-torn-bottom" />
       </div>
 
+      {/* Bottom torn half */}
       <div className="paper-half paper-bottom" ref={bottomHalfRef}>
-        <div className="paper-half-content paper-bottom-inner" />
+        <div className="paper-torn-edge paper-torn-top" />
       </div>
 
-      {/* Laser line */}
+      {/* Diagonal laser line */}
       <div className="laser-line" ref={laserRef} />
 
-      {/* Dark overlay for flash */}
-      <div className="paper-overlay" ref={overlayRef} />
+      {/* Glowing cut line that lingers */}
+      <div className="cut-glow-line" ref={cutGlowRef} />
     </div>
   );
 }

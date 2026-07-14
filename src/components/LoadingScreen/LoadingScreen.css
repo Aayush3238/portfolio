@@ -5,32 +5,29 @@
   width: 100%;
   height: 100%;
   z-index: 99999;
-  pointer-events: none;
   overflow: hidden;
+  pointer-events: none;
 }
 
+/* ── Paper Halves ── */
 .paper-half {
   position: absolute;
   left: 0;
   width: 100%;
   height: 50%;
-  overflow: hidden;
+  overflow: visible;
   will-change: transform, filter;
+  z-index: 2;
 }
 
 .paper-top {
   top: 0;
-  background: #0B0B14;
-  border-bottom: none;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  z-index: 2;
+  background: var(--bg, #0B0B14);
 }
 
 .paper-bottom {
   bottom: 0;
-  background: #0B0B14;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  z-index: 2;
+  background: var(--bg, #0B0B14);
 }
 
 .paper-half-content {
@@ -42,12 +39,42 @@
   position: relative;
 }
 
-.paper-bottom-inner {
-  background: #0B0B14;
+/* ── Torn Paper Edges ── */
+.paper-torn-edge {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  z-index: 3;
 }
 
+.paper-torn-bottom {
+  bottom: -1px;
+  background: var(--bg, #0B0B14);
+  clip-path: polygon(
+    0% 0%, 3% 40%, 6% 0%, 9% 50%, 12% 0%, 15% 35%, 18% 0%, 21% 45%,
+    24% 0%, 27% 55%, 30% 0%, 33% 40%, 36% 0%, 39% 50%, 42% 0%, 45% 35%,
+    48% 0%, 51% 45%, 54% 0%, 57% 55%, 60% 0%, 63% 40%, 66% 0%, 69% 50%,
+    72% 0%, 75% 35%, 78% 0%, 81% 45%, 84% 0%, 87% 55%, 90% 0%, 93% 40%,
+    96% 0%, 100% 50%, 100% 100%, 0% 100%
+  );
+}
+
+.paper-torn-top {
+  top: -1px;
+  background: var(--bg, #0B0B14);
+  clip-path: polygon(
+    0% 100%, 0% 0%, 3% 60%, 6% 100%, 9% 50%, 12% 100%, 15% 65%, 18% 100%,
+    21% 55%, 24% 100%, 27% 45%, 30% 100%, 33% 60%, 36% 100%, 39% 50%,
+    42% 100%, 45% 65%, 48% 100%, 51% 55%, 54% 100%, 57% 45%, 60% 100%,
+    63% 60%, 66% 100%, 69% 50%, 72% 100%, 75% 65%, 78% 100%, 81% 55%,
+    84% 100%, 87% 45%, 90% 100%, 93% 60%, 96% 100%, 100% 50%, 100% 100%
+  );
+}
+
+/* ── Logo ── */
 .paper-logo {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: 800;
   letter-spacing: -1px;
   display: flex;
@@ -55,7 +82,8 @@
   opacity: 0;
   will-change: opacity, transform, filter;
   position: relative;
-  z-index: 3;
+  z-index: 4;
+  user-select: none;
 }
 
 .paper-bracket {
@@ -76,51 +104,50 @@
 
 .paper-glow {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.25), transparent 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3), rgba(34, 211, 238, 0.08), transparent 70%);
   pointer-events: none;
   opacity: 0;
   will-change: opacity, transform;
   z-index: 1;
 }
 
+/* ── Laser Line ── */
 .laser-line {
   position: fixed;
   top: 50%;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #22D3EE, #8B5CF6, #22D3EE, transparent);
+  left: -5%;
+  width: 110%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #22D3EE 15%, #8B5CF6 50%, #22D3EE 85%, transparent 100%);
   box-shadow:
-    0 0 15px rgba(34, 211, 238, 0.8),
-    0 0 30px rgba(34, 211, 238, 0.4),
-    0 0 60px rgba(139, 92, 246, 0.3);
+    0 0 20px rgba(34, 211, 238, 0.9),
+    0 0 40px rgba(34, 211, 238, 0.5),
+    0 0 80px rgba(139, 92, 246, 0.4),
+    0 0 120px rgba(139, 92, 246, 0.2);
   z-index: 10;
-  transform-origin: left center;
+  transform-origin: center center;
+  transform: rotate(-35deg);
   opacity: 0;
   will-change: opacity, transform;
 }
 
-.paper-overlay {
+/* ── Cut Glow (lingers after laser) ── */
+.cut-glow-line {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0B0B14;
-  z-index: 1;
-}
-
-/* Remove old styles */
-.loading-screen,
-.loading-content,
-.loading-logo,
-.loading-bracket,
-.loading-dev,
-.loading-bar-container,
-.loading-bar,
-.loading-text {
-  display: none;
+  top: 50%;
+  left: -5%;
+  width: 110%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.6) 20%, rgba(139, 92, 246, 0.8) 50%, rgba(34, 211, 238, 0.6) 80%, transparent 100%);
+  box-shadow:
+    0 0 30px rgba(34, 211, 238, 0.4),
+    0 0 60px rgba(139, 92, 246, 0.2);
+  z-index: 9;
+  transform: rotate(-35deg);
+  transform-origin: center center;
+  opacity: 0;
+  will-change: opacity;
 }

@@ -13,30 +13,28 @@ import AnimatedGrid from './components/AnimatedGrid/AnimatedGrid';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false);
+  const [heroReady, setHeroReady] = useState(false);
 
   const handleLoadComplete = useCallback(() => {
-    setLoaded(true);
+    setHeroReady(true);
   }, []);
 
   return (
     <>
+      <ScrollProgress />
+      <AnimatedGrid />
+      <Navbar />
+      <main>
+        <Hero isRevealed={heroReady} />
+        <About />
+        <TechMarquee />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
+      <Footer />
       <LoadingScreen onComplete={handleLoadComplete} />
-      <div className={`app-content ${loaded ? 'app-revealed' : ''}`}>
-        <ScrollProgress />
-        <AnimatedGrid />
-        <Navbar />
-        <main>
-          <Hero isRevealed={loaded} />
-          <About />
-          <TechMarquee />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
     </>
   );
 }
