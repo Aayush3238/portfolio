@@ -57,7 +57,7 @@ export default function AnimatedGrid() {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(108, 99, 255, ${this.opacity})`;
+        ctx.fillStyle = `rgba(139, 92, 246, ${this.opacity})`;
         ctx.fill();
       }
     }
@@ -74,9 +74,9 @@ export default function AnimatedGrid() {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 140) {
-            const opacity = (1 - dist / 140) * 0.15;
+            const opacity = (1 - dist / 140) * 0.12;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(108, 99, 255, ${opacity})`;
+            ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);

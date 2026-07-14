@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
@@ -12,22 +13,30 @@ import AnimatedGrid from './components/AnimatedGrid/AnimatedGrid';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 
 export default function App() {
+  const [loaded, setLoaded] = useState(false);
+
+  const handleLoadComplete = useCallback(() => {
+    setLoaded(true);
+  }, []);
+
   return (
     <>
-      <LoadingScreen />
-      <ScrollProgress />
-      <AnimatedGrid />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <TechMarquee />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
-      </main>
-      <Footer />
+      <LoadingScreen onComplete={handleLoadComplete} />
+      <div className={`app-content ${loaded ? 'app-revealed' : ''}`}>
+        <ScrollProgress />
+        <AnimatedGrid />
+        <Navbar />
+        <main>
+          <Hero isRevealed={loaded} />
+          <About />
+          <TechMarquee />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }

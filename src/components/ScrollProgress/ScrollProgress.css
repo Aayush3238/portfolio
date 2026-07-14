@@ -3,8 +3,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #6c63ff, #e942f5, #6c63ff);
+  height: 2px;
+  background: linear-gradient(90deg, #8B5CF6, #22D3EE, #8B5CF6);
   background-size: 200% 100%;
   animation: shimmer 2s linear infinite;
   transform-origin: 0%;

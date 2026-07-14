@@ -6,7 +6,7 @@
 
 .project-card {
   border-radius: var(--radius);
-  background: var(--bg-card);
+  background: rgba(24, 24, 40, 0.6);
   border: 1px solid var(--border);
   overflow: hidden;
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
@@ -14,11 +14,12 @@
   flex-direction: column;
   position: relative;
   will-change: transform;
+  backdrop-filter: blur(10px);
 }
 
 .project-card:hover {
   border-color: var(--primary);
-  box-shadow: 0 20px 60px rgba(108, 99, 255, 0.15), 0 0 40px rgba(108, 99, 255, 0.05);
+  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.12), 0 0 40px rgba(139, 92, 246, 0.04);
 }
 
 .project-card-glow {
@@ -50,7 +51,7 @@
 .project-image-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(108, 99, 255, 0.12), rgba(233, 66, 245, 0.08));
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(34, 211, 238, 0.05));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,14 +131,14 @@
   border-radius: 20px;
   font-size: 0.78rem;
   font-weight: 500;
-  background: rgba(108, 99, 255, 0.1);
+  background: rgba(139, 92, 246, 0.1);
   color: var(--primary-light);
-  border: 1px solid rgba(108, 99, 255, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.2);
   transition: var(--transition);
 }
 
 .project-tech-tag:hover {
-  background: rgba(108, 99, 255, 0.2);
+  background: rgba(139, 92, 246, 0.2);
   border-color: var(--primary);
 }
 
@@ -154,7 +155,7 @@
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
-  background: rgba(108, 99, 255, 0.08);
+  background: rgba(139, 92, 246, 0.08);
   color: var(--text);
   border: 1px solid var(--border);
   transition: var(--transition);
@@ -163,7 +164,7 @@
 .project-link:hover {
   border-color: var(--primary);
   color: var(--primary-light);
-  background: rgba(108, 99, 255, 0.15);
+  background: rgba(139, 92, 246, 0.15);
 }
 
 .project-link-live {

@@ -10,7 +10,7 @@
 }
 
 .navbar.scrolled {
-  background: rgba(15, 15, 26, 0.92);
+  background: rgba(11, 11, 20, 0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   padding: 10px 0;
@@ -48,12 +48,12 @@
 
 .nav-links a:hover {
   color: var(--text-heading);
-  background: rgba(108, 99, 255, 0.1);
+  background: rgba(139, 92, 246, 0.08);
 }
 
 .nav-links a.nav-active {
   color: var(--text-heading);
-  background: rgba(108, 99, 255, 0.15);
+  background: rgba(139, 92, 246, 0.12);
 }
 
 .nav-links a.nav-active::after {
@@ -88,7 +88,8 @@
     width: 75%;
     max-width: 300px;
     height: 100vh;
-    background: var(--bg-card);
+    background: rgba(18, 18, 33, 0.95);
+    backdrop-filter: blur(20px);
     flex-direction: column;
     padding: 100px 32px 32px;
     gap: 4px;

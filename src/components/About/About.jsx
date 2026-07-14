@@ -41,7 +41,7 @@ export default function About() {
               <div className="about-image-placeholder">
                 <div className="about-avatar-ring">
                   <div className="about-avatar-inner">
-                    <span className="about-avatar-emoji">🧑‍💻</span>
+                    <FaCode className="about-avatar-icon" />
                   </div>
                 </div>
                 <p className="about-avatar-name">Aayush Kumar</p>

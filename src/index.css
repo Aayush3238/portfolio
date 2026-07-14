@@ -7,21 +7,28 @@
 }
 
 :root {
-  --primary: #6c63ff;
-  --primary-dark: #5a52d5;
-  --primary-light: #8b85ff;
-  --bg: #0f0f1a;
-  --bg-card: #1a1a2e;
-  --bg-card-hover: #222240;
-  --text: #e0e0e0;
-  --text-muted: #8888aa;
-  --text-heading: #ffffff;
-  --border: #2a2a4a;
-  --gradient: linear-gradient(135deg, #6c63ff, #e942f5);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
-  --radius: 16px;
-  --radius-sm: 10px;
+  --primary: #8B5CF6;
+  --primary-dark: #7C3AED;
+  --primary-light: #A78BFA;
+  --cyan: #22D3EE;
+  --cyan-dark: #06B6D4;
+  --bg: #0B0B14;
+  --bg-secondary: #121221;
+  --bg-card: #181828;
+  --bg-card-hover: #1E1E35;
+  --text: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --text-heading: #F8FAFC;
+  --border: #2A2A45;
+  --border-light: #363655;
+  --gradient: linear-gradient(135deg, #8B5CF6, #A78BFA);
+  --gradient-cyan: linear-gradient(135deg, #22D3EE, #06B6D4);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.15);
+  --radius: 18px;
+  --radius-sm: 12px;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -33,7 +40,7 @@ html {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg);
-  color: var(--text);
+  color: var(--text-secondary);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -72,7 +79,7 @@ input, textarea {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -122,7 +129,24 @@ input, textarea {
   background-clip: text;
 }
 
-/* ── Section Divider ── */
+/* App content reveal transition */
+.app-content {
+  opacity: 0;
+  transform: scale(0.97);
+  filter: blur(4px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform, filter;
+}
+
+.app-content.app-revealed {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
+
+/* Section Divider */
 .section-divider {
   width: 60px;
   height: 3px;
