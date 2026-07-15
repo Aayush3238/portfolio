@@ -2,9 +2,10 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCheck, FaSpinner } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
 import { personalInfo } from '../../data/portfolioData';
 import './Contact.css';
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojgjewk';
 
 function extractUsername(url, platform) {
   try {
@@ -24,29 +25,8 @@ function extractUsername(url, platform) {
   return '';
 }
 
-/* =============================================
-   EMAILJS SETUP INSTRUCTIONS:
-   
-   1. Go to https://www.emailjs.com/ and create a free account
-   2. Add an Email Service (Gmail, Outlook, etc.) and note the SERVICE_ID
-   3. Create an Email Template with these variables:
-      - {{from_name}}    → sender's name
-      - {{from_email}}   → sender's email
-      - {{subject}}      → email subject
-      - {{message}}      → email message
-      - {{to_name}}      → your name (Aayush Kumar)
-      Note the TEMPLATE_ID
-   4. Go to Account → API Keys and copy your PUBLIC KEY
-   5. Replace the three values below:
-   ============================================= */
-
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';       // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';     // e.g. 'template_xyz789'
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';       // e.g. 'abcdef123456'
-
 export default function Contact() {
   const ref = useRef(null);
-  const formRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
@@ -60,17 +40,16 @@ export default function Contact() {
     setStatus('sending');
 
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_PUBLIC_KEY
-      );
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error('Failed');
       setStatus('sent');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 4000);
-    } catch (err) {
-      console.error('Email send failed:', err);
+    } catch {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 4000);
     }
@@ -152,7 +131,6 @@ export default function Contact() {
           </motion.div>
 
           <motion.form
-            ref={formRef}
             className="contact-form"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}
