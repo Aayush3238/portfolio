@@ -6,6 +6,24 @@ import emailjs from '@emailjs/browser';
 import { personalInfo } from '../../data/portfolioData';
 import './Contact.css';
 
+function extractUsername(url, platform) {
+  try {
+    const parsed = new URL(url);
+    if (platform === 'github') {
+      const parts = parsed.pathname.split('/').filter(Boolean);
+      return parts[0] || '';
+    }
+    if (platform === 'linkedin') {
+      const parts = parsed.pathname.split('/').filter(Boolean);
+      const inIndex = parts.indexOf('in');
+      return parts[inIndex + 1]?.replace(/\/$/, '') || '';
+    }
+  } catch {
+    return '';
+  }
+  return '';
+}
+
 /* =============================================
    EMAILJS SETUP INSTRUCTIONS:
    
@@ -107,7 +125,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="contact-detail-label">LinkedIn</p>
-                  <p className="contact-detail-value">{personalInfo.linkedin.replace('https://', '')}</p>
+                  <p className="contact-detail-value">@{extractUsername(personalInfo.linkedin, 'linkedin')}</p>
                 </div>
               </a>
 
@@ -117,7 +135,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="contact-detail-label">GitHub</p>
-                  <p className="contact-detail-value">{personalInfo.github.replace('https://', '')}</p>
+                  <p className="contact-detail-value">@{extractUsername(personalInfo.github, 'github')}</p>
                 </div>
               </a>
 
