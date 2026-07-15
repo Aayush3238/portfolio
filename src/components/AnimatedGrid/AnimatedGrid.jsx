@@ -4,7 +4,6 @@ import './AnimatedGrid.css';
 const PARTICLE_COUNT_BASE = 90;
 const ORB_COUNT = 6;
 const SHAPE_COUNT = 8;
-const TRAIL_LENGTH = 12;
 
 const PURPLE = [139, 92, 246];
 const CYAN = [34, 211, 238];
@@ -30,8 +29,8 @@ export default function AnimatedGrid() {
     const ctx = canvas.getContext('2d');
     let animationId;
     let mouse = { x: -9999, y: -9999 };
+    let mouseGlow = { x: -9999, y: -9999, opacity: 0 };
     let scrollY = 0;
-    let trail = [];
     let time = 0;
 
     const resize = () => {
@@ -43,8 +42,6 @@ export default function AnimatedGrid() {
     const handleMouse = (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
-      trail.push({ x: e.clientX, y: e.clientY, age: 0 });
-      if (trail.length > TRAIL_LENGTH) trail.shift();
     };
 
     const handleScroll = () => {
@@ -200,26 +197,31 @@ export default function AnimatedGrid() {
       }
     }
 
-    // ── Mouse Trail Glow ────────────────────────────────────────
-    const drawTrail = () => {
-      for (let i = trail.length - 1; i >= 0; i--) {
-        trail[i].age++;
-        if (trail[i].age > 30) {
-          trail.splice(i, 1);
-          continue;
-        }
-        const t = trail[i];
-        const alpha = (1 - t.age / 30) * 0.25;
-        const radius = 3 + (1 - t.age / 30) * 10;
-        const grad = ctx.createRadialGradient(t.x, t.y, 0, t.x, t.y, radius);
-        grad.addColorStop(0, `rgba(139,92,246,${alpha})`);
-        grad.addColorStop(0.6, `rgba(34,211,238,${alpha * 0.4})`);
-        grad.addColorStop(1, 'rgba(139,92,246,0)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(t.x, t.y, radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    // ── Soft Mouse Glow ─────────────────────────────────────────
+    const drawMouseGlow = () => {
+      mouseGlow.x += (mouse.x - mouseGlow.x) * 0.08;
+      mouseGlow.y += (mouse.y - mouseGlow.y) * 0.08;
+
+      const dx = mouse.x - mouseGlow.x;
+      const dy = mouse.y - mouseGlow.y;
+      const moving = Math.sqrt(dx * dx + dy * dy) > 0.5;
+      const target = moving ? 0.35 : 0;
+      mouseGlow.opacity += (target - mouseGlow.opacity) * 0.04;
+
+      if (mouseGlow.opacity < 0.005) return;
+
+      const radius = 120;
+      const grad = ctx.createRadialGradient(
+        mouseGlow.x, mouseGlow.y, 0,
+        mouseGlow.x, mouseGlow.y, radius
+      );
+      grad.addColorStop(0, `rgba(139,92,246,${mouseGlow.opacity * 0.6})`);
+      grad.addColorStop(0.4, `rgba(34,211,238,${mouseGlow.opacity * 0.2})`);
+      grad.addColorStop(1, 'rgba(139,92,246,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(mouseGlow.x, mouseGlow.y, radius, 0, Math.PI * 2);
+      ctx.fill();
     };
 
     // ── Connect Nearby Particles ────────────────────────────────
@@ -276,8 +278,8 @@ export default function AnimatedGrid() {
       }
       connectParticles(particles);
 
-      // Mouse trail
-      drawTrail();
+      // Mouse glow
+      drawMouseGlow();
 
       animationId = requestAnimationFrame(animate);
     };
