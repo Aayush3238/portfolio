@@ -82,6 +82,16 @@ const ctaVariants = {
 };
 
 export default function Hero({ isRevealed }) {
+  const [scrollHidden, setScrollHidden] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollHidden(window.scrollY > 200);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section id="home" className="hero">
       <div className="hero-bg-gradient" />
@@ -187,8 +197,9 @@ export default function Hero({ isRevealed }) {
       <motion.div
         className="hero-scroll-indicator"
         initial={{ opacity: 0 }}
-        animate={{ opacity: isRevealed ? 1 : 0 }}
-        transition={{ delay: 1.4 }}
+        animate={{ opacity: isRevealed && !scrollHidden ? 1 : 0 }}
+        transition={{ delay: isRevealed ? 1.4 : 0, duration: 0.3 }}
+        style={{ pointerEvents: scrollHidden ? 'none' : 'auto' }}
       >
         <span className="hero-scroll-text">Scroll Down</span>
         <a href="#about" className="hero-scroll-arrow">

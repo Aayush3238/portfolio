@@ -45,19 +45,24 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
+      role="banner"
     >
+      <a href="#main-content" className="skip-to-content">
+        Skip to content
+      </a>
       <div className="nav-container">
-        <a href="#home" className="nav-logo">
+        <a href="#home" className="nav-logo" aria-label="Home">
           <span className="gradient-text">&lt;Dev /&gt;</span>
         </a>
 
-        <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
+        <ul className={`nav-links ${isOpen ? 'active' : ''}`} role="list">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={handleLinkClick}
                 className={activeSection === link.href.replace('#', '') ? 'nav-active' : ''}
+                aria-current={activeSection === link.href.replace('#', '') ? 'true' : undefined}
               >
                 {link.label}
               </a>
@@ -68,7 +73,9 @@ export default function Navbar() {
         <button
           className="nav-toggle"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>

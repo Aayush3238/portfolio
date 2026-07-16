@@ -24,7 +24,7 @@ export default function App() {
       <ScrollProgress />
       <AnimatedGrid />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero isRevealed={heroReady} />
         <About />
         <TechMarquee />

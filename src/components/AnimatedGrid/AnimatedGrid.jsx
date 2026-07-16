@@ -224,26 +224,49 @@ export default function AnimatedGrid() {
       ctx.fill();
     };
 
-    // ── Connect Nearby Particles ────────────────────────────────
+    // ── Spatial Hash Grid for O(n) particle connections ─────────
+    const CELL_SIZE = 130;
+    let grid = {};
+
+    const gridKey = (cx, cy) => `${cx},${cy}`;
+
+    const insertParticle = (p) => {
+      const cx = Math.floor(p.x / CELL_SIZE);
+      const cy = Math.floor(p.y / CELL_SIZE);
+      const key = gridKey(cx, cy);
+      if (!grid[key]) grid[key] = [];
+      grid[key].push(p);
+    };
+
     const connectParticles = (particles) => {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.09;
-            const mixedColor = lerpColor(
-              particles[i].color,
-              particles[j].color,
-              0.5
-            );
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(${mixedColor[0]},${mixedColor[1]},${mixedColor[2]},${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
+      grid = {};
+      for (const p of particles) insertParticle(p);
+
+      for (const p of particles) {
+        const cx = Math.floor(p.x / CELL_SIZE);
+        const cy = Math.floor(p.y / CELL_SIZE);
+
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            const key = gridKey(cx + dx, cy + dy);
+            const cell = grid[key];
+            if (!cell) continue;
+            for (const other of cell) {
+              if (p === other) continue;
+              const ddx = p.x - other.x;
+              const ddy = p.y - other.y;
+              const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+              if (dist < 130) {
+                const alpha = (1 - dist / 130) * 0.09;
+                const mixedColor = lerpColor(p.color, other.color, 0.5);
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(${mixedColor[0]},${mixedColor[1]},${mixedColor[2]},${alpha})`;
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(other.x, other.y);
+                ctx.stroke();
+              }
+            }
           }
         }
       }

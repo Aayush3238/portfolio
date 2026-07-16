@@ -1,131 +1,156 @@
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import { useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import './LoadingScreen.css';
 
 export default function LoadingScreen({ onComplete }) {
-  const containerRef = useRef(null);
-  const logoRef = useRef(null);
-  const slashRef = useRef(null);
-  const glowRef = useRef(null);
-  const laserRef = useRef(null);
-  const topHalfRef = useRef(null);
-  const bottomHalfRef = useRef(null);
-  const cutGlowRef = useRef(null);
-  const [animationDone, setAnimationDone] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const logo = useAnimation();
+  const glow = useAnimation();
+  const slash = useAnimation();
+  const laser = useAnimation();
+  const cutGlow = useAnimation();
+  const topHalf = useAnimation();
+  const bottomHalf = useAnimation();
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          document.body.style.overflow = '';
-          setAnimationDone(true);
-          onComplete?.();
-        }
-      });
-
+    const sequence = async () => {
       // Phase 1: Logo appears with glow build
-      tl.fromTo(logoRef.current,
-        { opacity: 0, scale: 0.8, filter: 'blur(10px)' },
-        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.45, ease: 'power2.out' }
-      );
-
-      tl.fromTo(glowRef.current,
-        { opacity: 0, scale: 0.5 },
-        { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' },
-        '-=0.3'
-      );
+      await Promise.all([
+        logo.start({
+          opacity: 1,
+          scale: 1,
+          filter: 'blur(0px)',
+          transition: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] },
+        }),
+        glow.start({
+          opacity: 1,
+          scale: 1,
+          transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.15 },
+        }),
+      ]);
 
       // Slash cyan glow intensifies
-      tl.fromTo(slashRef.current,
-        { textShadow: '0 0 0px rgba(34, 211, 238, 0)' },
-        { textShadow: '0 0 25px rgba(34, 211, 238, 0.9), 0 0 50px rgba(34, 211, 238, 0.5), 0 0 80px rgba(34, 211, 238, 0.2)', duration: 0.35, ease: 'power2.in' },
-        '-=0.2'
-      );
+      await slash.start({
+        textShadow: '0 0 25px rgba(34, 211, 238, 0.9), 0 0 50px rgba(34, 211, 238, 0.5), 0 0 80px rgba(34, 211, 238, 0.2)',
+        transition: { duration: 0.35, ease: 'easeIn' },
+      });
 
-      // Phase 2: Laser cut slices across the screen
-      tl.fromTo(laserRef.current,
-        { opacity: 0, scaleX: 0 },
-        { opacity: 1, scaleX: 1, duration: 0.25, ease: 'power4.in' },
-        '+=0.08'
-      );
+      await new Promise((r) => setTimeout(r, 80));
 
-      // Cut glow line appears
-      tl.fromTo(cutGlowRef.current,
-        { opacity: 0, scaleX: 0 },
-        { opacity: 1, scaleX: 1, duration: 0.25, ease: 'power4.in' },
-        '<'
-      );
+      // Phase 2: Laser cut slices across the screen + cut glow
+      await Promise.all([
+        laser.start({
+          opacity: 1,
+          scaleX: 1,
+          transition: { duration: 0.25, ease: [0.36, 0, 0.66, -0.56] },
+        }),
+        cutGlow.start({
+          opacity: 1,
+          scaleX: 1,
+          transition: { duration: 0.25, ease: [0.36, 0, 0.66, -0.56] },
+        }),
+      ]);
 
       // Laser fades out
-      tl.to(laserRef.current, {
+      await laser.start({
         opacity: 0,
-        duration: 0.12,
-        ease: 'power2.out'
+        transition: { duration: 0.12, ease: 'easeOut' },
       });
 
       // Phase 3: Screen tears apart along the cut
-      tl.to(topHalfRef.current, {
-        y: '-105%',
-        rotation: -1.5,
-        filter: 'blur(6px)',
-        duration: 0.5,
-        ease: 'power3.in'
-      }, '-=0.05');
+      await Promise.all([
+        topHalf.start({
+          y: '-105%',
+          rotate: -1.5,
+          filter: 'blur(6px)',
+          transition: { duration: 0.5, ease: [0.32, 0, 0.67, 0] },
+        }),
+        bottomHalf.start({
+          y: '105%',
+          rotate: 1.5,
+          filter: 'blur(6px)',
+          transition: { duration: 0.5, ease: [0.32, 0, 0.67, 0] },
+        }),
+      ]);
 
-      tl.to(bottomHalfRef.current, {
-        y: '105%',
-        rotation: 1.5,
-        filter: 'blur(6px)',
-        duration: 0.5,
-        ease: 'power3.in'
-      }, '<');
-
-      // Cut glow lingers then fades
-      tl.to(cutGlowRef.current, {
+      // Cut glow lingers then fades (concurrent with tear)
+      cutGlow.start({
         opacity: 0,
-        duration: 0.4,
-        ease: 'power2.out'
-      }, '-=0.4');
+        transition: { duration: 0.4, ease: 'easeOut' },
+      });
 
-    }, containerRef);
+      document.body.style.overflow = '';
+      setVisible(false);
+      onComplete?.();
+    };
+
+    sequence();
 
     return () => {
-      ctx.revert();
       document.body.style.overflow = '';
     };
-  }, [onComplete]);
+  }, [onComplete, logo, glow, slash, laser, cutGlow, topHalf, bottomHalf]);
 
-  if (animationDone) return null;
+  if (!visible) return null;
 
   return (
-    <div className="paper-cut-loader" ref={containerRef}>
+    <div className="paper-cut-loader">
       {/* Top torn half */}
-      <div className="paper-half paper-top" ref={topHalfRef}>
+      <motion.div
+        className="paper-half paper-top"
+        animate={topHalf}
+        initial={{ y: 0, rotate: 0, filter: 'blur(0px)' }}
+      >
         <div className="paper-half-content">
-          <div className="paper-logo" ref={logoRef}>
+          <motion.div
+            className="paper-logo"
+            animate={logo}
+            initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+          >
             <span className="paper-bracket">&lt;</span>
             <span className="paper-dev">Dev</span>
-            <span className="paper-slash" ref={slashRef}> /</span>
+            <motion.span
+              className="paper-slash"
+              animate={slash}
+              initial={{ textShadow: '0 0 0px rgba(34, 211, 238, 0)' }}
+            >
+              {' /'}
+            </motion.span>
             <span className="paper-bracket">&gt;</span>
-          </div>
-          <div className="paper-glow" ref={glowRef} />
+          </motion.div>
+          <motion.div
+            className="paper-glow"
+            animate={glow}
+            initial={{ opacity: 0, scale: 0.5 }}
+          />
         </div>
-        {/* Torn edge - jagged bottom */}
         <div className="paper-torn-edge paper-torn-bottom" />
-      </div>
+      </motion.div>
 
       {/* Bottom torn half */}
-      <div className="paper-half paper-bottom" ref={bottomHalfRef}>
+      <motion.div
+        className="paper-half paper-bottom"
+        animate={bottomHalf}
+        initial={{ y: 0, rotate: 0, filter: 'blur(0px)' }}
+      >
         <div className="paper-torn-edge paper-torn-top" />
-      </div>
+      </motion.div>
 
       {/* Diagonal laser line */}
-      <div className="laser-line" ref={laserRef} />
+      <motion.div
+        className="laser-line"
+        animate={laser}
+        initial={{ opacity: 0, scaleX: 0 }}
+      />
 
       {/* Glowing cut line that lingers */}
-      <div className="cut-glow-line" ref={cutGlowRef} />
+      <motion.div
+        className="cut-glow-line"
+        animate={cutGlow}
+        initial={{ opacity: 0, scaleX: 0 }}
+      />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { FiMapPin } from 'react-icons/fi';
 import { personalInfo } from '../../data/portfolioData';
 import './Contact.css';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojgjewk';
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/mojgjewk';
 
 function extractUsername(url, platform) {
   try {
