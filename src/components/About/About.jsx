@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaCode, FaRocket, FaDatabase } from 'react-icons/fa';
-import { aboutParagraphs, highlights, education } from '../../data/portfolioData';
+import { aboutParagraphs, highlights, education, principles } from '../../data/portfolioData';
 import './About.css';
 
 const iconMap = { FaCode, FaRocket, FaDatabase };
@@ -96,6 +96,23 @@ export default function About() {
                 );
               })}
             </div>
+
+            <motion.div
+              className="about-philosophy"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              <h4>What I care about</h4>
+              <div className="about-philosophy-grid">
+                {principles.map((item, i) => (
+                  <div key={i} className="about-philosophy-card">
+                    <h5>{item.title}</h5>
+                    <p>{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

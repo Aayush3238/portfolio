@@ -167,6 +167,46 @@
   color: var(--text-muted);
 }
 
+.about-philosophy {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  background: rgba(24, 24, 40, 0.6);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.about-philosophy h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 14px;
+}
+
+.about-philosophy-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.about-philosophy-card {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.16);
+}
+
+.about-philosophy-card h5 {
+  font-size: 0.9rem;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+}
+
+.about-philosophy-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
 @media (max-width: 768px) {
   .about-grid {
     grid-template-columns: 1fr;

@@ -31,29 +31,44 @@ export const personalInfo = {
   portfolio: '',
 };
 
-export const heroIntro = `I build full-stack applications and scalable backend systems using React, Node.js, Express.js, MongoDB, and PostgreSQL. I'm passionate about backend engineering, REST APIs, performance optimization, and writing clean, maintainable code.`;
+export const heroIntro = `I'm a software engineer who enjoys building full-stack products that feel fast, reliable, and thoughtfully designed. I care about clean APIs, scalable systems, and turning complex ideas into experiences people actually enjoy using.`;
 
 export const aboutParagraphs = [
-  "I'm a Software Engineering student at Maharaja Agrasen Institute of Technology, pursuing B.Tech in Computer Science Engineering (Expected Graduation: 2028) with a CGPA of 8.28/10.",
-  "I have hands-on experience building full-stack applications and scalable backend systems. Currently working as a Software Developer Intern at Nexera, where I contribute to a full-stack learning platform using React.js, Next.js, Node.js, Express.js, and PostgreSQL.",
-  "I'm passionate about backend engineering, REST APIs, performance optimization, and writing clean, maintainable code. I enjoy solving complex problems and building products that make a real impact.",
+  "I'm a Computer Science student and developer who enjoys building products at the intersection of backend engineering and thoughtful user experience.",
+  "My work usually starts with a problem: how to make a system faster, safer, or easier to use. From there, I focus on building reliable APIs, secure flows, and interfaces that feel simple without being shallow.",
+  "I’m especially interested in full-stack development, performance-minded architecture, and turning ideas into products that are both practical and memorable.",
 ];
 
 export const highlights = [
   {
     icon: 'FaCode',
     title: 'Full Stack Development',
-    desc: 'Building end-to-end web applications with React, Node.js, Express.js, and modern databases.',
+    desc: 'Building end-to-end products that connect strong backend systems with polished user experiences.',
   },
   {
     icon: 'FaRocket',
-    title: 'Performance Optimization',
-    desc: 'Designing high-performance pipelines, caching with Redis, and optimizing delivery systems.',
+    title: 'Performance Mindset',
+    desc: 'Designing faster delivery pipelines, optimizing data flow, and making systems feel effortless under real usage.',
   },
   {
     icon: 'FaDatabase',
-    title: 'Backend Engineering',
-    desc: 'Building scalable REST APIs, real-time systems with Socket.IO, and secure authentication flows.',
+    title: 'Reliable Systems',
+    desc: 'Creating secure APIs, scalable architecture, and real-time features that hold up as products grow.',
+  },
+];
+
+export const principles = [
+  {
+    title: 'Backend-first thinking',
+    desc: 'I like starting with structure, reliability, and data flow before layering on the experience.',
+  },
+  {
+    title: 'Performance matters',
+    desc: 'A great product should feel fast, responsive, and frictionless even when the system is doing a lot.',
+  },
+  {
+    title: 'Build with intent',
+    desc: 'Every feature should solve a real need and be simple enough for people to understand and trust.',
   },
 ];
 
@@ -126,7 +141,7 @@ export const skillCategories = [
 export const projects = [
   {
     title: 'PixelFlow',
-    description: 'An adaptive image delivery platform with real-time optimization through intelligent format negotiation, responsive resizing, and on-demand transformations.',
+    description: 'A performance-focused image delivery platform that makes media-heavy apps feel faster through smart resizing, format negotiation, and on-demand transformations.',
     tech: ['React.js', 'Express.js', 'Redis', 'Sharp'],
     features: [
       'High-performance delivery pipeline with Sharp, Redis, and object storage for optimized image variants',
@@ -139,7 +154,7 @@ export const projects = [
   },
   {
     title: 'HomeHive',
-    description: 'A full-stack property marketplace supporting secure buyer-owner workflows with role-based access control, Google OAuth 2.0, and real-time encrypted messaging.',
+    description: 'A secure property marketplace built around real-time communication, role-based workflows, and a smooth experience for buyers, owners, and admins.',
     tech: ['Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Socket.IO'],
     features: [
       'Encrypted real-time messaging using Socket.IO with RSA-OAEP encryption',
