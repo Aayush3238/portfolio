@@ -13,7 +13,6 @@ import AnimatedGrid from './components/AnimatedGrid/AnimatedGrid';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import CursorSpotlight from './components/CursorSpotlight/CursorSpotlight';
 import StatusBar from './components/StatusBar/StatusBar';
-import SectionReveal from './components/SectionReveal/SectionReveal';
 import EasterEgg from './components/EasterEgg/EasterEgg';
 
 export default function App() {
@@ -32,24 +31,12 @@ export default function App() {
       <Navbar />
       <main id="main-content">
         <Hero isRevealed={heroReady} />
-        <SectionReveal variant="fadeUp">
-          <About />
-        </SectionReveal>
-        <SectionReveal variant="diagonalWipe">
-          <TechMarquee />
-        </SectionReveal>
-        <SectionReveal variant="scaleIn">
-          <Skills />
-        </SectionReveal>
-        <SectionReveal variant="slideFromBottom">
-          <Projects />
-        </SectionReveal>
-        <SectionReveal variant="fadeLeft">
-          <Experience />
-        </SectionReveal>
-        <SectionReveal variant="fadeRight">
-          <Contact />
-        </SectionReveal>
+        <About />
+        <TechMarquee />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
       </main>
       <Footer />
       <LoadingScreen onComplete={handleLoadComplete} />
