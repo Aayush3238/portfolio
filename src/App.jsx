@@ -11,9 +11,6 @@ import Footer from './components/Footer/Footer';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import AnimatedGrid from './components/AnimatedGrid/AnimatedGrid';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
-import CursorSpotlight from './components/CursorSpotlight/CursorSpotlight';
-import StatusBar from './components/StatusBar/StatusBar';
-import EasterEgg from './components/EasterEgg/EasterEgg';
 
 export default function App() {
   const [heroReady, setHeroReady] = useState(false);
@@ -24,8 +21,6 @@ export default function App() {
 
   return (
     <>
-      <CursorSpotlight />
-      <StatusBar />
       <ScrollProgress />
       <AnimatedGrid />
       <Navbar />
@@ -40,7 +35,6 @@ export default function App() {
       </main>
       <Footer />
       <LoadingScreen onComplete={handleLoadComplete} />
-      <EasterEgg />
     </>
   );
 }

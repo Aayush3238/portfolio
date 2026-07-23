@@ -53,19 +53,10 @@
   background: var(--cyan);
 }
 
-@media (hover: none) {
+@media (hover: none), (pointer: coarse) {
   .cursor-spotlight,
   .cursor-ring,
   .cursor-dot {
-    display: none;
+    display: none !important;
   }
-}
-
-body {
-  cursor: none;
-}
-
-a, button, .skill-item, .project-card, .timeline-item,
-.achievement-card, .about-highlight-card {
-  cursor: none;
 }
