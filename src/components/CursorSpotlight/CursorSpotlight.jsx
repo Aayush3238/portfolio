@@ -6,6 +6,10 @@ export default function CursorSpotlight() {
   const ringRef = useRef(null);
   const spotlightRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
+  const mousePos = useRef({ x: -100, y: -100 });
+  const dotPos = useRef({ x: -100, y: -100 });
+  const ringPos = useRef({ x: -100, y: -100 });
+  const spotPos = useRef({ x: -200, y: -200 });
 
   useEffect(() => {
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -16,56 +20,46 @@ export default function CursorSpotlight() {
     const spotlight = spotlightRef.current;
     if (!dot || !ring || !spotlight) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let dotX = 0;
-    let dotY = 0;
-    let ringX = 0;
-    let ringY = 0;
-    let spotX = 0;
-    let spotY = 0;
-
     const handleMouseMove = (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      mousePos.current = { x: e.clientX, y: e.clientY };
     };
 
     const handleMouseOver = (e) => {
       const target = e.target;
-      if (
-        target.closest('a') ||
+      const isInteractive = target.closest('a') ||
         target.closest('button') ||
         target.closest('.skill-item') ||
         target.closest('.project-card') ||
         target.closest('.timeline-item') ||
         target.closest('.achievement-card') ||
         target.closest('.about-highlight-card') ||
-        target.closest('.nav-links a')
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
+        target.closest('.nav-links a') ||
+        target.closest('.project-detail') ||
+        target.closest('.theme-toggle');
+      setIsHovering(!!isInteractive);
     };
 
+    let animId;
     const animate = () => {
-      dotX += (mouseX - dotX) * 0.25;
-      dotY += (mouseY - dotY) * 0.25;
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      spotX += (mouseX - spotX) * 0.06;
-      spotY += (mouseY - spotY) * 0.06;
+      const { x: mx, y: my } = mousePos.current;
 
-      dot.style.transform = `translate(${dotX - 4}px, ${dotY - 4}px)`;
-      ring.style.transform = `translate(${ringX - 20}px, ${ringY - 20}px)`;
-      spotlight.style.transform = `translate(${spotX - 150}px, ${spotY - 150}px)`;
+      dotPos.current.x += (mx - dotPos.current.x) * 0.2;
+      dotPos.current.y += (my - dotPos.current.y) * 0.2;
+      ringPos.current.x += (mx - ringPos.current.x) * 0.1;
+      ringPos.current.y += (my - ringPos.current.y) * 0.1;
+      spotPos.current.x += (mx - spotPos.current.x) * 0.05;
+      spotPos.current.y += (my - spotPos.current.y) * 0.05;
 
-      requestAnimationFrame(animate);
+      dot.style.transform = `translate(${dotPos.current.x - 3}px, ${dotPos.current.y - 3}px)`;
+      ring.style.transform = `translate(${ringPos.current.x - 18}px, ${ringPos.current.y - 18}px)`;
+      spotlight.style.transform = `translate(${spotPos.current.x - 200}px, ${spotPos.current.y - 200}px)`;
+
+      animId = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-    const animId = requestAnimationFrame(animate);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
+    animId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);

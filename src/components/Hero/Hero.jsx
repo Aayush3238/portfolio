@@ -121,6 +121,43 @@ function LiveTerminal() {
   );
 }
 
+function TypingEffect() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout;
+
+    if (!isDeleting && text === currentRole) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && text === '') {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else {
+      timeout = setTimeout(
+        () => {
+          setText(
+            isDeleting
+              ? currentRole.substring(0, text.length - 1)
+              : currentRole.substring(0, text.length + 1)
+          );
+        },
+        isDeleting ? 40 : 80
+      );
+    }
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, roleIndex]);
+
+  return (
+    <span className="hero-typing-text">
+      {text}
+      <span className="hero-typing-cursor">|</span>
+    </span>
+  );
+}
+
 const heroVariants = {
   hidden: { opacity: 0 },
   visible: {
