@@ -4,7 +4,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 80px;
+  padding-top: 110px;
 }
 
 .hero-bg-gradient {
@@ -272,16 +272,26 @@
   background: var(--gradient);
 }
 
-/* Code Window */
-.hero-code-window {
+/* Live Terminal */
+.hero-terminal {
   width: 100%;
-  padding: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Fira Code', 'Courier New', monospace;
 }
 
-.hero-code-dots {
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(30, 30, 50, 0.8);
+  border-bottom: 1px solid rgba(42, 42, 69, 0.5);
+}
+
+.terminal-dots {
   display: flex;
   gap: 6px;
-  margin-bottom: 16px;
 }
 
 .dot {
@@ -294,38 +304,64 @@
 .dot-yellow { background: #febc2e; }
 .dot-green { background: #28c840; }
 
-.hero-code-content {
-  font-family: 'Fira Code', 'Courier New', monospace;
-  font-size: 0.85rem;
-  line-height: 1.8;
-}
-
-.code-line {
+.terminal-title {
+  font-size: 0.7rem;
   color: var(--text-muted);
+  opacity: 0.7;
 }
 
-.code-indent {
-  padding-left: 20px;
+.terminal-body {
+  padding: 16px;
+  background: rgba(11, 11, 20, 0.6);
+  max-height: 220px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
-.code-keyword {
-  color: #c792ea;
+.terminal-body::-webkit-scrollbar {
+  width: 4px;
 }
 
-.code-var {
-  color: #82aaff;
+.terminal-body::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
 }
 
-.code-key {
-  color: #f78c6c;
+.terminal-line {
+  margin-bottom: 6px;
+  line-height: 1.6;
 }
 
-.code-string {
-  color: #c3e88d;
+.terminal-line p {
+  margin: 0;
+  font-size: 0.78rem;
 }
 
-.code-bool {
-  color: #f78c6c;
+.terminal-prompt {
+  color: var(--cyan);
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.terminal-cmd {
+  color: var(--text-heading);
+}
+
+.terminal-output {
+  color: var(--text-muted);
+  padding-left: 16px;
+}
+
+.terminal-cursor {
+  color: var(--primary-light);
+  animation: blink 0.8s infinite;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 /* Floating Tags */

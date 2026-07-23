@@ -1,0 +1,71 @@
+.cursor-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08), transparent 70%);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(139, 92, 246, 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.cursor-ring-hover {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(34, 211, 238, 0.5);
+  background: rgba(34, 211, 238, 0.04);
+  transform: translate(-28px, -28px);
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  pointer-events: none;
+  z-index: 10000;
+  will-change: transform;
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+}
+
+.cursor-dot-hover {
+  width: 6px;
+  height: 6px;
+  background: var(--cyan);
+}
+
+@media (hover: none) {
+  .cursor-spotlight,
+  .cursor-ring,
+  .cursor-dot {
+    display: none;
+  }
+}
+
+body {
+  cursor: none;
+}
+
+a, button, .skill-item, .project-card, .timeline-item,
+.achievement-card, .about-highlight-card {
+  cursor: none;
+}

@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowRight, FiArrowDown } from 'react-icons/fi';
 import { FaGithub, FaLinkedin, FaEnvelope, FaTwitter } from 'react-icons/fa';
 import { personalInfo, heroIntro } from '../../data/portfolioData';
+import MagneticButton from '../MagneticButton/MagneticButton';
 import './Hero.css';
 
 const roles = [
@@ -13,40 +14,110 @@ const roles = [
   'Software Engineer',
 ];
 
-function TypingEffect() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
+const terminalLines = [
+  { type: 'input', text: 'git log --oneline -4' },
+  { type: 'output', text: 'e797db8 feat: deploy portfolio to Vercel' },
+  { type: 'output', text: 'a3f21c1 feat: add contact form with Formspree' },
+  { type: 'output', text: '9b1c4e0 feat: PixelFlow image pipeline' },
+  { type: 'output', text: 'f4d2a87 feat: HomeHive real-time messaging' },
+  { type: 'input', text: 'echo $STACK' },
+  { type: 'output', text: 'React | Node.js | PostgreSQL | Redis | Tailwind' },
+  { type: 'input', text: 'whoami' },
+  { type: 'output', text: 'Aayush Kumar — building reliable full-stack products' },
+];
+
+function LiveTerminal() {
+  const [visibleLines, setVisibleLines] = useState([]);
+  const [currentLine, setCurrentLine] = useState(0);
+  const [currentChar, setCurrentChar] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
+  const terminalRef = useRef(null);
 
   useEffect(() => {
-    const currentRole = roles[roleIndex];
-    let timeout;
-
-    if (!isDeleting && text === currentRole) {
-      timeout = setTimeout(() => setIsDeleting(true), 2000);
-    } else if (isDeleting && text === '') {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    } else {
-      timeout = setTimeout(
-        () => {
-          setText(
-            isDeleting
-              ? currentRole.substring(0, text.length - 1)
-              : currentRole.substring(0, text.length + 1)
-          );
-        },
-        isDeleting ? 40 : 80
-      );
+    if (currentLine >= terminalLines.length) {
+      setIsTyping(false);
+      const restartTimeout = setTimeout(() => {
+        setVisibleLines([]);
+        setCurrentLine(0);
+        setCurrentChar(0);
+        setIsTyping(true);
+      }, 4000);
+      return () => clearTimeout(restartTimeout);
     }
-    return () => clearTimeout(timeout);
-  }, [text, isDeleting, roleIndex]);
+
+    const line = terminalLines[currentLine];
+
+    if (line.type === 'output') {
+      const showTimeout = setTimeout(() => {
+        setVisibleLines((prev) => [...prev, line]);
+        setCurrentLine((prev) => prev + 1);
+        setCurrentChar(0);
+      }, 50);
+      return () => clearTimeout(showTimeout);
+    }
+
+    if (currentChar < line.text.length) {
+      const typeSpeed = 30 + Math.random() * 40;
+      const typeTimeout = setTimeout(() => {
+        setCurrentChar((prev) => prev + 1);
+      }, typeSpeed);
+      return () => clearTimeout(typeTimeout);
+    }
+
+    const doneTimeout = setTimeout(() => {
+      setVisibleLines((prev) => [...prev, { ...line, text: line.text }]);
+      setCurrentLine((prev) => prev + 1);
+      setCurrentChar(0);
+    }, 300);
+    return () => clearTimeout(doneTimeout);
+  }, [currentLine, currentChar]);
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [visibleLines, currentChar]);
+
+  const typingLine = isTyping && currentLine < terminalLines.length && terminalLines[currentLine].type === 'input'
+    ? terminalLines[currentLine].text.substring(0, currentChar)
+    : null;
 
   return (
-    <span className="hero-typing-text">
-      {text}
-      <span className="hero-typing-cursor">|</span>
-    </span>
+    <div className="hero-terminal">
+      <div className="terminal-header">
+        <div className="terminal-dots">
+          <span className="dot dot-red" />
+          <span className="dot dot-yellow" />
+          <span className="dot dot-green" />
+        </div>
+        <span className="terminal-title">portfolio ~ zsh</span>
+      </div>
+      <div className="terminal-body" ref={terminalRef}>
+        {visibleLines.map((line, i) => (
+          <div key={i} className="terminal-line">
+            {line.type === 'input' ? (
+              <p><span className="terminal-prompt">❯</span> <span className="terminal-cmd">{line.text}</span></p>
+            ) : (
+              <p className="terminal-output">{line.text}</p>
+            )}
+          </div>
+        ))}
+        {typingLine !== null && (
+          <div className="terminal-line">
+            <p>
+              <span className="terminal-prompt">❯</span>{' '}
+              <span className="terminal-cmd">{typingLine}</span>
+              <span className="terminal-cursor">▌</span>
+            </p>
+          </div>
+        )}
+        {typingLine === null && isTyping && currentLine >= terminalLines.length && (
+          <div className="terminal-line">
+            <p><span className="terminal-prompt">❯</span> <span className="terminal-cursor">▌</span></p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -121,16 +192,22 @@ export default function Hero({ isRevealed }) {
               <motion.p className="hero-intro" variants={itemVariants}>{heroIntro}</motion.p>
 
               <motion.div className="hero-buttons" variants={ctaVariants}>
-                <a href="#projects" className="btn btn-primary hero-btn-glow">
-                  View Projects
-                  <FiArrowRight />
-                </a>
-                <a href="#contact" className="btn btn-secondary">
-                  Contact Me
-                </a>
-                <a href={personalInfo.resumePath} download className="btn btn-secondary">
-                  Resume
-                </a>
+                <MagneticButton strength={0.2}>
+                  <a href="#projects" className="btn btn-primary hero-btn-glow">
+                    View Projects
+                    <FiArrowRight />
+                  </a>
+                </MagneticButton>
+                <MagneticButton strength={0.2}>
+                  <a href="#contact" className="btn btn-secondary">
+                    Contact Me
+                  </a>
+                </MagneticButton>
+                <MagneticButton strength={0.2}>
+                  <a href={personalInfo.resumePath} download className="btn btn-secondary">
+                    Resume
+                  </a>
+                </MagneticButton>
               </motion.div>
 
               <motion.div className="hero-socials" variants={itemVariants}>
@@ -173,20 +250,7 @@ export default function Hero({ isRevealed }) {
                   <span>npm run dev</span>
                 </div>
                 <div className="hero-character-placeholder">
-                  <div className="hero-code-window">
-                    <div className="hero-code-dots">
-                      <span className="dot dot-red" />
-                      <span className="dot dot-yellow" />
-                      <span className="dot dot-green" />
-                    </div>
-                    <div className="hero-code-content">
-                      <p className="code-line"><span className="code-keyword">const</span> <span className="code-var">developer</span> = {'{'}</p>
-                      <p className="code-line code-indent"><span className="code-key">name</span>: <span className="code-string">"Aayush"</span>,</p>
-                      <p className="code-line code-indent"><span className="code-key">passion</span>: <span className="code-string">"Building"</span>,</p>
-                      <p className="code-line code-indent"><span className="code-key">coffee</span>: <span className="code-bool">true</span></p>
-                      <p className="code-line">{'};'}</p>
-                    </div>
-                  </div>
+                  <LiveTerminal />
                 </div>
               </div>
             </motion.div>
