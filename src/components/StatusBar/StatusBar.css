@@ -1,0 +1,42 @@
+.status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  background: rgba(139, 92, 246, 0.08);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 6px 0;
+  font-size: 0.78rem;
+}
+
+.status-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-emoji {
+  font-size: 0.85rem;
+}
+
+.status-text {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .status-bar {
+    font-size: 0.72rem;
+    padding: 5px 0;
+  }
+}

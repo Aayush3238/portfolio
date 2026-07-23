@@ -18,7 +18,7 @@
 
 .navbar {
   position: fixed;
-  top: 0;
+  top: 32px;
   left: 0;
   right: 0;
   z-index: 1000;
@@ -93,6 +93,12 @@
   font-size: 1.4rem;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 @media (max-width: 768px) {
   .nav-toggle {
     display: block;
@@ -128,4 +134,16 @@
   .nav-links a.nav-active::after {
     display: none;
   }
+
+  .nav-actions {
+    gap: 8px;
+  }
+}
+
+[data-theme="light"] .navbar.scrolled {
+  background: rgba(248, 249, 252, 0.9);
+}
+
+[data-theme="light"] .nav-links {
+  background: rgba(248, 249, 252, 0.98);
 }

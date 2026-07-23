@@ -5,6 +5,65 @@
   align-items: center;
 }
 
+.about-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 48px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: rgba(24, 24, 40, 0.6);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.about-stat-item {
+  text-align: center;
+}
+
+.about-stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.count-up-value {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.about-stat-divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+}
+
+@media (max-width: 768px) {
+  .about-stats {
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .about-stat-number {
+    font-size: 1.5rem;
+  }
+
+  .about-stat-label {
+    font-size: 0.72rem;
+  }
+}
+
 .about-image-card {
   position: relative;
 }

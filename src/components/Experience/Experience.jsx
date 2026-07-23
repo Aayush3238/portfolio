@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaBriefcase, FaAward, FaTrophy, FaGraduationCap } from 'react-icons/fa';
 import { experience, achievements, education, certifications, codingProfiles } from '../../data/portfolioData';
+import ScrambleText from '../ScrambleText/ScrambleText';
 import './Experience.css';
 
 export default function Experience() {
@@ -17,7 +18,7 @@ export default function Experience() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          Experience & <span className="gradient-text">Achievements</span>
+          Experience & <span className="gradient-text"><ScrambleText text="Achievements" delay={100} /></span>
         </motion.h2>
         <motion.p
           className="section-subtitle"

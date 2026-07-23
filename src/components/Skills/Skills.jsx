@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { skillCategories } from '../../data/portfolioData';
+import ScrambleText from '../ScrambleText/ScrambleText';
 import './Skills.css';
 
 export default function Skills() {
@@ -16,7 +17,7 @@ export default function Skills() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          My <span className="gradient-text">Skills</span>
+          My <span className="gradient-text"><ScrambleText text="Skills" delay={100} /></span>
         </motion.h2>
         <motion.p
           className="section-subtitle"

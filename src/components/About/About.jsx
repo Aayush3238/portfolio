@@ -2,6 +2,8 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaCode, FaRocket, FaDatabase } from 'react-icons/fa';
 import { aboutParagraphs, highlights, education, principles } from '../../data/portfolioData';
+import ScrambleText from '../ScrambleText/ScrambleText';
+import CountUp from '../CountUp/CountUp';
 import './About.css';
 
 const iconMap = { FaCode, FaRocket, FaDatabase };
@@ -19,7 +21,7 @@ export default function About() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          About <span className="gradient-text">Me</span>
+          About <span className="gradient-text"><ScrambleText text="Me" delay={100} /></span>
         </motion.h2>
         <motion.p
           className="section-subtitle"
@@ -29,6 +31,33 @@ export default function About() {
         >
           Get to know me better
         </motion.p>
+
+        <motion.div
+          className="about-stats"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <div className="about-stat-item">
+            <div className="about-stat-number"><CountUp end={2} suffix="+" /></div>
+            <div className="about-stat-label">Projects Shipped</div>
+          </div>
+          <div className="about-stat-divider" />
+          <div className="about-stat-item">
+            <div className="about-stat-number"><CountUp end={6} suffix="+" /></div>
+            <div className="about-stat-label">Technologies</div>
+          </div>
+          <div className="about-stat-divider" />
+          <div className="about-stat-item">
+            <div className="about-stat-number"><CountUp end={8} suffix=".28" prefix="" /></div>
+            <div className="about-stat-label">Current CGPA</div>
+          </div>
+          <div className="about-stat-divider" />
+          <div className="about-stat-item">
+            <div className="about-stat-number"><CountUp end={1} suffix="+" /></div>
+            <div className="about-stat-label">Years Coding</div>
+          </div>
+        </motion.div>
 
         <div className="about-grid">
           <motion.div

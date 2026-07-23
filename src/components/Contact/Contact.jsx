@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCheck, FaSpinner } from 'react-icons/fa';
 import { FiMapPin } from 'react-icons/fi';
 import { personalInfo } from '../../data/portfolioData';
+import ScrambleText from '../ScrambleText/ScrambleText';
 import './Contact.css';
 
 const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/mojgjewk';
@@ -64,7 +65,7 @@ export default function Contact() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          Get In <span className="gradient-text">Touch</span>
+          Get In <span className="gradient-text"><ScrambleText text="Touch" delay={100} /></span>
         </motion.h2>
         <motion.p
           className="section-subtitle"
