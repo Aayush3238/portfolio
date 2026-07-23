@@ -109,3 +109,17 @@
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.2); }
 }
+
+.footer-easter-hint {
+  margin-top: 12px;
+  font-size: 0.7rem !important;
+  opacity: 0.25;
+  transition: opacity 0.3s ease;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer-easter-hint:hover {
+  opacity: 0.6;
+  color: var(--primary-light) !important;
+}

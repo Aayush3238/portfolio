@@ -48,6 +48,7 @@ export default function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {personalInfo.name}. Made with <FiHeart className="footer-heart" /> React
           </p>
+          <p className="footer-easter-hint">try the konami code</p>
         </div>
       </div>
     </footer>

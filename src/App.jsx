@@ -11,6 +11,10 @@ import Footer from './components/Footer/Footer';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import AnimatedGrid from './components/AnimatedGrid/AnimatedGrid';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
+import CursorSpotlight from './components/CursorSpotlight/CursorSpotlight';
+import StatusBar from './components/StatusBar/StatusBar';
+import SectionReveal from './components/SectionReveal/SectionReveal';
+import EasterEgg from './components/EasterEgg/EasterEgg';
 
 export default function App() {
   const [heroReady, setHeroReady] = useState(false);
@@ -21,20 +25,35 @@ export default function App() {
 
   return (
     <>
+      <CursorSpotlight />
+      <StatusBar />
       <ScrollProgress />
       <AnimatedGrid />
       <Navbar />
       <main id="main-content">
         <Hero isRevealed={heroReady} />
-        <About />
-        <TechMarquee />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
+        <SectionReveal variant="fadeUp">
+          <About />
+        </SectionReveal>
+        <SectionReveal variant="diagonalWipe">
+          <TechMarquee />
+        </SectionReveal>
+        <SectionReveal variant="scaleIn">
+          <Skills />
+        </SectionReveal>
+        <SectionReveal variant="slideFromBottom">
+          <Projects />
+        </SectionReveal>
+        <SectionReveal variant="fadeLeft">
+          <Experience />
+        </SectionReveal>
+        <SectionReveal variant="fadeRight">
+          <Contact />
+        </SectionReveal>
       </main>
       <Footer />
       <LoadingScreen onComplete={handleLoadComplete} />
+      <EasterEgg />
     </>
   );
 }
