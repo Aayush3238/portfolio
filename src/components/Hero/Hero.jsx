@@ -1,10 +1,12 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowRight, FiArrowDown } from 'react-icons/fi';
 import { FaGithub, FaLinkedin, FaEnvelope, FaTwitter } from 'react-icons/fa';
 import { personalInfo, heroIntro } from '../../data/portfolioData';
 import MagneticButton from '../MagneticButton/MagneticButton';
 import './Hero.css';
+
+const Hero3D = lazy(() => import('../Hero3D/Hero3D'));
 
 const roles = [
   'Full Stack Web Developer',
@@ -286,8 +288,14 @@ export default function Hero({ isRevealed }) {
                 <div className="hero-floating-tag hero-tag-3">
                   <span>npm run dev</span>
                 </div>
-                <div className="hero-character-placeholder">
-                  <LiveTerminal />
+                <div className="hero-3d-placeholder">
+                  <Suspense fallback={
+                    <div className="hero-3d-fallback">
+                      <div className="hero-3d-fallback-cube" />
+                    </div>
+                  }>
+                    <Hero3D />
+                  </Suspense>
                 </div>
               </div>
             </motion.div>
