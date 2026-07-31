@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FaCode, FaRocket, FaDatabase } from 'react-icons/fa';
-import { aboutParagraphs, highlights, education, principles } from '../../data/portfolioData';
+import { aboutParagraphs, highlights, education, principles, impactStats } from '../../data/portfolioData';
 import ScrambleText from '../ScrambleText/ScrambleText';
 import CountUp from '../CountUp/CountUp';
 import './About.css';
@@ -29,7 +29,7 @@ export default function About() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Get to know me better
+          Building practical products with strong engineering fundamentals
         </motion.p>
 
         <motion.div
@@ -38,25 +38,14 @@ export default function About() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
-          <div className="about-stat-item">
-            <div className="about-stat-number"><CountUp end={2} suffix="+" /></div>
-            <div className="about-stat-label">Projects Shipped</div>
-          </div>
-          <div className="about-stat-divider" />
-          <div className="about-stat-item">
-            <div className="about-stat-number"><CountUp end={6} suffix="+" /></div>
-            <div className="about-stat-label">Technologies</div>
-          </div>
-          <div className="about-stat-divider" />
-          <div className="about-stat-item">
-            <div className="about-stat-number"><CountUp end={8} suffix=".28" prefix="" /></div>
-            <div className="about-stat-label">Current CGPA</div>
-          </div>
-          <div className="about-stat-divider" />
-          <div className="about-stat-item">
-            <div className="about-stat-number"><CountUp end={1} suffix="+" /></div>
-            <div className="about-stat-label">Years Coding</div>
-          </div>
+          {impactStats.map((stat, index) => (
+            <div className="about-stat-item" key={index}>
+              <div className="about-stat-number">
+                <CountUp end={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="about-stat-label">{stat.label}</div>
+            </div>
+          ))}
         </motion.div>
 
         <div className="about-grid">
@@ -132,7 +121,7 @@ export default function About() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
-              <h4>What I care about</h4>
+              <h4>How I approach building</h4>
               <div className="about-philosophy-grid">
                 {principles.map((item, i) => (
                   <div key={i} className="about-philosophy-card">

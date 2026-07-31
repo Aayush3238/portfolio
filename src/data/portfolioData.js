@@ -31,44 +31,51 @@ export const personalInfo = {
   portfolio: '',
 };
 
-export const heroIntro = `I'm a software engineer who enjoys building full-stack products that feel fast, reliable, and thoughtfully designed. I care about clean APIs, scalable systems, and turning complex ideas into experiences people actually enjoy using.`;
+export const heroIntro = `I build full-stack products that balance engineering depth with user-first design. My focus is on clean architecture, responsive interfaces, and systems that feel reliable under real-world usage.`;
 
 export const aboutParagraphs = [
-  "I'm a Computer Science student and developer who enjoys building products at the intersection of backend engineering and thoughtful user experience.",
-  "My work usually starts with a problem: how to make a system faster, safer, or easier to use. From there, I focus on building reliable APIs, secure flows, and interfaces that feel simple without being shallow.",
-  "I’m especially interested in full-stack development, performance-minded architecture, and turning ideas into products that are both practical and memorable.",
+  "I’m a Computer Science student and developer who enjoys solving product problems across the entire stack — from backend reliability to polished front-end interaction.",
+  "I care about building systems that are fast, secure, and easy to use. That usually means starting with the data flow and core product logic, then shaping the experience around clarity and speed.",
+  "Right now, I’m most interested in full-stack engineering, scalable APIs, and turning raw ideas into products that people want to keep using.",
+];
+
+export const impactStats = [
+  { value: 2, suffix: '+', label: 'Production projects shipped' },
+  { value: 6, suffix: '+', label: 'Core technologies used regularly' },
+  { value: 8, suffix: '.28', label: 'Current CGPA' },
+  { value: 1, suffix: '+', label: 'Year of focused development' },
 ];
 
 export const highlights = [
   {
     icon: 'FaCode',
-    title: 'Full Stack Development',
-    desc: 'Building end-to-end products that connect strong backend systems with polished user experiences.',
+    title: 'End-to-end delivery',
+    desc: 'I design and build product experiences across frontend, backend, data flow, and deployment concerns.',
   },
   {
     icon: 'FaRocket',
-    title: 'Performance Mindset',
-    desc: 'Designing faster delivery pipelines, optimizing data flow, and making systems feel effortless under real usage.',
+    title: 'Performance-first thinking',
+    desc: 'I optimize for responsiveness, reduce unnecessary load, and make interfaces feel quick and intentional.',
   },
   {
     icon: 'FaDatabase',
-    title: 'Reliable Systems',
-    desc: 'Creating secure APIs, scalable architecture, and real-time features that hold up as products grow.',
+    title: 'Reliable system design',
+    desc: 'My work leans toward secure APIs, thoughtful structure, and product logic that scales with confidence.',
   },
 ];
 
 export const principles = [
   {
-    title: 'Backend-first thinking',
-    desc: 'I like starting with structure, reliability, and data flow before layering on the experience.',
+    title: 'Backend clarity first',
+    desc: 'Strong systems begin with clean data handling, reliable contracts, and predictable behavior.',
   },
   {
-    title: 'Performance matters',
-    desc: 'A great product should feel fast, responsive, and frictionless even when the system is doing a lot.',
+    title: 'Keep the experience smooth',
+    desc: 'A polished interface is only valuable when the underlying flow is fast, resilient, and intuitive.',
   },
   {
-    title: 'Build with intent',
-    desc: 'Every feature should solve a real need and be simple enough for people to understand and trust.',
+    title: 'Ship with purpose',
+    desc: 'I prefer features that solve real friction and improve the user journey rather than adding surface-level complexity.',
   },
 ];
 
@@ -142,6 +149,8 @@ export const projects = [
   {
     title: 'PixelFlow',
     description: 'A performance-focused image delivery platform that makes media-heavy apps feel faster through smart resizing, format negotiation, and on-demand transformations.',
+    challenge: 'Media-heavy products need fast delivery without sacrificing quality or developer control.',
+    outcome: 'Built a high-throughput image pipeline that improves delivery efficiency and simplifies content handling for scale.',
     tech: ['React.js', 'Express.js', 'Redis', 'Sharp'],
     features: [
       'High-performance delivery pipeline with Sharp, Redis, and object storage for optimized image variants',
@@ -155,6 +164,8 @@ export const projects = [
   {
     title: 'HomeHive',
     description: 'A secure property marketplace built around real-time communication, role-based workflows, and a smooth experience for buyers, owners, and admins.',
+    challenge: 'Property platforms need strong trust, fast communication, and role-aware workflows across different user types.',
+    outcome: 'Created a full marketplace experience with encrypted chat, location-aware search, and streamlined request flows.',
     tech: ['Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Socket.IO'],
     features: [
       'Encrypted real-time messaging using Socket.IO with RSA-OAEP encryption',
