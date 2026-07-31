@@ -20,12 +20,26 @@ function ProjectDetail({ project, index, isActive }) {
       </div>
       <p className="project-detail-desc">{project.description}</p>
 
+      <div className="project-case-study-grid">
+        <div className="project-case-study-card">
+          <span className="project-case-label">Challenge</span>
+          <p>{project.challenge}</p>
+        </div>
+        <div className="project-case-study-card">
+          <span className="project-case-label">Outcome</span>
+          <p>{project.outcome}</p>
+        </div>
+      </div>
+
       {project.features && project.features.length > 0 && (
-        <ul className="project-features">
-          {project.features.map((feat, fi) => (
-            <li key={fi}>{feat}</li>
-          ))}
-        </ul>
+        <div className="project-feature-block">
+          <span className="project-feature-title">Highlights</span>
+          <ul className="project-features">
+            {project.features.map((feat, fi) => (
+              <li key={fi}>{feat}</li>
+            ))}
+          </ul>
+        </div>
       )}
 
       <div className="project-tech">
