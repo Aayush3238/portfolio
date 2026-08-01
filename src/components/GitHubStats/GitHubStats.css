@@ -1,0 +1,258 @@
+.github-chart-wrapper {
+  margin-bottom: 24px;
+}
+
+.github-chart-card {
+  padding: 24px;
+  border-radius: var(--radius);
+  background: rgba(24, 24, 40, 0.6);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.github-chart-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+}
+
+.github-chart-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.github-chart-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  position: relative;
+  z-index: 1;
+}
+
+.github-chart-icon {
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.github-chart-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.github-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.github-stats-card {
+  padding: 20px;
+  border-radius: var(--radius);
+  background: rgba(24, 24, 40, 0.6);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.github-stats-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+}
+
+.github-stats-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.github-streak-img,
+.leetcode-card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.leetcode-calendar-section {
+  margin-bottom: 32px;
+}
+
+.leetcode-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.leetcode-calendar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.leetcode-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gradient);
+  flex-shrink: 0;
+}
+
+.leetcode-calendar-year {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid var(--border);
+}
+
+.github-cta-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.github-cta-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: var(--text-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.github-cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.github-cta-btn:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+.github-cta-btn:hover::before {
+  opacity: 0.12;
+}
+
+.github-cta-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+.github-cta-icon {
+  font-size: 1.2rem;
+}
+
+.github-cta-ext {
+  font-size: 0.72rem;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.github-cta-btn:hover .github-cta-ext {
+  opacity: 1;
+}
+
+.leetcode-cta {
+  background: rgba(255, 161, 22, 0.1);
+  border-color: rgba(255, 161, 22, 0.3);
+}
+
+.leetcode-cta:hover {
+  border-color: #ffa116;
+  box-shadow: 0 4px 20px rgba(255, 161, 22, 0.25);
+}
+
+.leetcode-cta:hover::before {
+  background: linear-gradient(135deg, #ffa116, #ff8c00);
+}
+
+.leetcode-cta-icon {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #ffa116;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: rgba(255, 161, 22, 0.15);
+  font-family: 'Fira Code', monospace;
+}
+
+@media (max-width: 768px) {
+  .github-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .github-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .github-cta-btn {
+    justify-content: center;
+  }
+
+  .leetcode-calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .github-chart-card {
+    padding: 16px;
+  }
+
+  .github-stats-card {
+    padding: 14px;
+  }
+}

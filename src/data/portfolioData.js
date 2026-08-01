@@ -26,6 +26,9 @@ export const personalInfo = {
      REPLACE: Add your actual URLs below
      ============================================= */
   github: 'https://github.com/Aayush3238',
+  githubUsername: 'Aayush3238',
+  leetcode: 'https://leetcode.com/u/kumar_aayussh/',
+  leetcodeUsername: 'kumar_aayussh',
   linkedin: 'https://www.linkedin.com/in/aayush-kumar-0b17a1316/',
   twitter: '',  /* add if available */
   portfolio: '',
