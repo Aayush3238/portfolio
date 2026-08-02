@@ -232,31 +232,52 @@
 @media (max-width: 768px) {
   .github-stats-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
 
   .github-cta-group {
     flex-direction: column;
     align-items: stretch;
+    gap: 16px;
   }
 
   .github-cta-btn {
     justify-content: center;
+    padding: 16px 24px;
   }
 
   .leetcode-calendar-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
+  }
+
+  .github-chart-card {
+    padding: 20px;
+  }
+
+  .github-stats-card {
+    padding: 18px;
   }
 }
 
 @media (max-width: 480px) {
   .github-chart-card {
     padding: 16px;
+    border-radius: 14px;
   }
 
   .github-stats-card {
     padding: 14px;
+    border-radius: 14px;
+  }
+
+  .github-cta-btn {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+  }
+
+  .github-cta-icon {
+    font-size: 1.1rem;
   }
 }

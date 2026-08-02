@@ -256,15 +256,70 @@
 @media (max-width: 768px) {
   .lc-calendar-container {
     padding: 20px 16px;
+    border-radius: 14px;
   }
 
   .lc-calendar-stats {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: 8px;
+  }
+
+  .lc-stat {
+    font-size: 0.82rem;
   }
 
   .lc-stat-dot {
     display: none;
+  }
+
+  .lc-day {
+    width: 11px;
+    height: 11px;
+  }
+
+  .lc-weeks {
+    gap: 2px;
+  }
+
+  .lc-week {
+    gap: 2px;
+  }
+
+  .lc-day-labels {
+    width: 22px;
+  }
+
+  .lc-day-label {
+    height: 11px;
+    font-size: 0.6rem;
+  }
+
+  .lc-month-label {
+    font-size: 0.65rem;
+  }
+
+  .lc-calendar-legend {
+    margin-top: 16px;
+  }
+
+  .lc-legend-block {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lc-calendar-container {
+    padding: 16px 12px;
+  }
+
+  .lc-day {
+    width: 10px;
+    height: 10px;
+  }
+
+  .lc-calendar-grid {
+    min-width: 600px;
   }
 }
