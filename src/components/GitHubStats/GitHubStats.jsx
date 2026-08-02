@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { personalInfo } from '../../data/portfolioData';
-import LeetCodeCalendar from '../LeetCodeCalendar/LeetCodeCalendar';
 import ScrambleText from '../ScrambleText/ScrambleText';
 import './GitHubStats.css';
 
@@ -96,7 +95,14 @@ export default function GitHubStats() {
             </div>
             <span className="leetcode-calendar-year">{new Date().getFullYear()}</span>
           </div>
-          <LeetCodeCalendar username={LEETCODE_USERNAME} />
+          <div className="leetcode-heatmap-card">
+            <img
+              src={`https://leetcard.jacoblin.cool/${LEETCODE_USERNAME}?ext=heatmap&theme=dark`}
+              alt={`${LEETCODE_USERNAME}'s LeetCode submission heatmap`}
+              className="leetcode-heatmap-img"
+              loading="lazy"
+            />
+          </div>
         </motion.div>
 
         <motion.div
