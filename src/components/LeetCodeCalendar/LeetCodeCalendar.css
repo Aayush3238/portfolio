@@ -1,17 +1,17 @@
 :root {
-  --lc-level-0: rgba(139, 92, 246, 0.06);
-  --lc-level-1: rgba(139, 92, 246, 0.22);
-  --lc-level-2: rgba(139, 92, 246, 0.42);
-  --lc-level-3: rgba(139, 92, 246, 0.65);
-  --lc-level-4: #8B5CF6;
+  --lc-level-0: rgba(255, 161, 22, 0.06);
+  --lc-level-1: rgba(255, 161, 22, 0.22);
+  --lc-level-2: rgba(255, 161, 22, 0.42);
+  --lc-level-3: rgba(255, 161, 22, 0.65);
+  --lc-level-4: #ffa116;
 }
 
 [data-theme="light"] {
-  --lc-level-0: rgba(139, 92, 246, 0.08);
-  --lc-level-1: rgba(139, 92, 246, 0.2);
-  --lc-level-2: rgba(139, 92, 246, 0.38);
-  --lc-level-3: rgba(139, 92, 246, 0.58);
-  --lc-level-4: #7C3AED;
+  --lc-level-0: rgba(255, 161, 22, 0.08);
+  --lc-level-1: rgba(255, 161, 22, 0.2);
+  --lc-level-2: rgba(255, 161, 22, 0.38);
+  --lc-level-3: rgba(255, 161, 22, 0.58);
+  --lc-level-4: #ff8c00;
 }
 
 .lc-calendar-container {
@@ -60,7 +60,7 @@
 
 .lc-stat-number {
   font-weight: 700;
-  color: var(--primary);
+  color: #ffa116;
 }
 
 .lc-stat-dot {
@@ -156,14 +156,14 @@
 }
 
 .lc-day:hover {
-  outline-color: var(--primary);
+  outline-color: #ffa116;
   transform: scale(1.4);
   z-index: 2;
   position: relative;
 }
 
 .lc-day:focus-visible {
-  outline-color: var(--primary);
+  outline-color: #ffa116;
   outline-width: 2px;
 }
 
@@ -218,7 +218,7 @@
   height: 40px;
   border-radius: 50%;
   border: 3px solid var(--border);
-  border-top-color: var(--primary);
+  border-top-color: #ffa116;
   animation: lc-spin 0.8s linear infinite;
 }
 
@@ -238,13 +238,13 @@
 }
 
 .lc-calendar-fallback a {
-  color: var(--primary);
+  color: #ffa116;
   font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .lc-calendar-fallback a:hover {
-  color: var(--primary-light);
+  color: #ff8c00;
 }
 
 @media (max-width: 768px) {
