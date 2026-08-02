@@ -2,17 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import './LeetCodeCalendar.css';
 
-const LEETCODE_GRAPHQL = 'https://leetcode.com/graphql';
-
-const QUERY = `
-query userProfileCalendar($username: String!, $year: Int) {
-  matchedUser(username: $username) {
-    submissionCalendar
-    streak
-    totalActiveDays
-  }
-}
-`;
+const LEETCODE_API = 'https://leetcode-sub-endpoint.vercel.app/leetcode';
 
 const LEVELS = [
   'var(--lc-level-0)',
@@ -29,15 +19,13 @@ function getWeeksForYear(calendarData, year) {
   const startDate = new Date(year, 0, 1);
   const endDate = new Date(year, 11, 31);
 
-  const dayOfWeek = startDate.getDay();
   const weeks = [];
   let currentWeek = new Array(7).fill(null);
 
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
     const dayIndex = d.getDay();
-    const timestamp = Math.floor(d.getTime() / 1000);
-    const dateKey = Math.floor(new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() / 1000);
-    const count = calendarData[dateKey] || 0;
+    const dateStr = d.toISOString().split('T')[0];
+    const count = calendarData[dateStr] || 0;
 
     currentWeek[dayIndex] = {
       date: new Date(d),
@@ -106,33 +94,44 @@ export default function LeetCodeCalendar({ username }) {
 
     async function fetchCalendar() {
       try {
-        const res = await fetch(LEETCODE_GRAPHQL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            query: QUERY,
-            variables: { username, year: currentYear },
-          }),
-        });
+        const res = await fetch(`${LEETCODE_API}/${username}`);
+        const calendarData = await res.json();
 
-        const json = await res.json();
-        const user = json?.data?.matchedUser;
-
-        if (!user || !user.submissionCalendar) {
+        if (!calendarData || typeof calendarData !== 'object') {
           setError(true);
           setLoading(false);
           return;
         }
 
-        const calendarData = JSON.parse(user.submissionCalendar);
-        const calendarEntries = {};
-        for (const [key, val] of Object.entries(calendarData)) {
-          calendarEntries[Number(key)] = val;
+        const weeksData = getWeeksForYear(calendarData, currentYear);
+        setWeeks(weeksData);
+
+        let activeDays = 0;
+        let maxStreak = 0;
+        let currentStreak = 0;
+
+        const sortedDates = Object.keys(calendarData).sort();
+        for (let i = 0; i < sortedDates.length; i++) {
+          if (calendarData[sortedDates[i]] > 0) {
+            activeDays++;
+            if (i === 0) {
+              currentStreak = 1;
+            } else {
+              const prev = new Date(sortedDates[i - 1]);
+              const curr = new Date(sortedDates[i]);
+              const diffDays = (curr - prev) / (1000 * 60 * 60 * 24);
+              if (diffDays === 1) {
+                currentStreak++;
+              } else {
+                currentStreak = 1;
+              }
+            }
+            maxStreak = Math.max(maxStreak, currentStreak);
+          }
         }
 
-        setWeeks(getWeeksForYear(calendarEntries, currentYear));
-        setTotalActiveDays(user.totalActiveDays || 0);
-        setStreak(user.streak || 0);
+        setTotalActiveDays(activeDays);
+        setStreak(maxStreak);
       } catch {
         setError(true);
       } finally {
