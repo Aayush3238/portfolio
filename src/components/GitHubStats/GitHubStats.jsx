@@ -61,7 +61,7 @@ export default function GitHubStats() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <img
-              src={`https://github-readme-streak-stats.herokuapp.com/?user=${GITHUB_USERNAME}&theme=dark&hide_border=true`}
+              src={`https://streak-stats.demolab.com/?user=${GITHUB_USERNAME}&theme=dark&hide_border=true`}
               alt={`${GITHUB_USERNAME}'s GitHub streak stats`}
               className="github-streak-img"
               loading="lazy"
