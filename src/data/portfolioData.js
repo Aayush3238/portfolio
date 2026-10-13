@@ -1,183 +1,199 @@
-import {
-  FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython,
-  FaGit, FaDatabase, FaCode
-} from 'react-icons/fa';
-import {
-  SiTailwindcss, SiExpress, SiMongodb, SiPostgresql,
-  SiRedis, SiPostman, SiSocketdotio, SiCplusplus
-} from 'react-icons/si';
-
 /* =============================================
    PORTFOLIO DATA — EDIT YOUR INFO HERE
    All personal content is centralized in this
    file. Update values below to personalize
    your portfolio.
+
+   Project copy must stay factual: describe only
+   what is shipped, and mark anything else as
+   concept / in development.
    ============================================= */
 
 export const personalInfo = {
   name: 'Aayush Kumar',
-  role: 'Full Stack Web Developer',
-  tagline: 'Software Engineer',
+  initials: 'AK',
+  role: 'Full Stack Software Engineer',
   email: 'aayushkumar3238@gmail.com',
   phone: '+91-9891157420',
   location: 'India',
   resumePath: '/resume.pdf',
-  /* =============================================
-     REPLACE: Add your actual URLs below
-     ============================================= */
   github: 'https://github.com/Aayush3238',
   githubUsername: 'Aayush3238',
   leetcode: 'https://leetcode.com/u/kumar_aayussh/',
   leetcodeUsername: 'kumar_aayussh',
   linkedin: 'https://www.linkedin.com/in/aayush-kumar-0b17a1316/',
-  twitter: '',  /* add if available */
-  portfolio: '',
+  twitter: '',
 };
 
-export const heroIntro = `I build full-stack products that balance engineering depth with user-first design. My focus is on clean architecture, responsive interfaces, and systems that feel reliable under real-world usage.`;
+export const heroHeadline = {
+  line1: 'I build software.',
+  line2: 'Then make it smarter.',
+};
 
-export const aboutParagraphs = [
-  "I’m a Computer Science student and developer who enjoys solving product problems across the entire stack — from backend reliability to polished front-end interaction.",
-  "I care about building systems that are fast, secure, and easy to use. That usually means starting with the data flow and core product logic, then shaping the experience around clarity and speed.",
-  "Right now, I’m most interested in full-stack engineering, scalable APIs, and turning raw ideas into products that people want to keep using.",
-];
-
-export const impactStats = [
-  { value: 2, suffix: '+', label: 'Production projects shipped' },
-  { value: 6, suffix: '+', label: 'Core technologies used regularly' },
-  { value: 8, suffix: '.28', label: 'Current CGPA' },
-  { value: 1, suffix: '+', label: 'Year of focused development' },
-];
-
-export const highlights = [
-  {
-    icon: 'FaCode',
-    title: 'End-to-end delivery',
-    desc: 'I design and build product experiences across frontend, backend, data flow, and deployment concerns.',
-  },
-  {
-    icon: 'FaRocket',
-    title: 'Performance-first thinking',
-    desc: 'I optimize for responsiveness, reduce unnecessary load, and make interfaces feel quick and intentional.',
-  },
-  {
-    icon: 'FaDatabase',
-    title: 'Reliable system design',
-    desc: 'My work leans toward secure APIs, thoughtful structure, and product logic that scales with confidence.',
-  },
-];
-
-export const principles = [
-  {
-    title: 'Backend clarity first',
-    desc: 'Strong systems begin with clean data handling, reliable contracts, and predictable behavior.',
-  },
-  {
-    title: 'Keep the experience smooth',
-    desc: 'A polished interface is only valuable when the underlying flow is fast, resilient, and intuitive.',
-  },
-  {
-    title: 'Ship with purpose',
-    desc: 'I prefer features that solve real friction and improve the user journey rather than adding surface-level complexity.',
-  },
-];
-
-export const skillCategories = [
-  {
-    title: 'Languages',
-    skills: [
-      { name: 'C++', icon: SiCplusplus, color: '#00599C' },
-      { name: 'JavaScript', icon: FaJs, color: '#f7df1e' },
-      { name: 'Python', icon: FaPython, color: '#3776ab' },
-      { name: 'SQL', icon: FaDatabase, color: '#4169e1' },
-    ],
-  },
-  {
-    title: 'Frontend',
-    skills: [
-      { name: 'React.js', icon: FaReact, color: '#61dafb' },
-      { name: 'Next.js', icon: FaReact, color: '#ffffff' },
-      { name: 'HTML5', icon: FaHtml5, color: '#e34f26' },
-      { name: 'CSS3', icon: FaCss3Alt, color: '#1572b6' },
-      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06b6d4' },
-    ],
-  },
-  {
-    title: 'Backend',
-    skills: [
-      { name: 'Node.js', icon: FaNodeJs, color: '#68a063' },
-      { name: 'Express.js', icon: SiExpress, color: '#ffffff' },
-      { name: 'REST APIs', icon: FaCode, color: '#6c63ff' },
-      { name: 'JWT Auth', icon: FaCode, color: '#e942f5' },
-    ],
-  },
-  {
-    title: 'Databases',
-    skills: [
-      { name: 'MongoDB', icon: SiMongodb, color: '#47a248' },
-      { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169e1' },
-      { name: 'Redis', icon: SiRedis, color: '#dc382d' },
-      { name: 'Supabase', icon: FaDatabase, color: '#3ecf8e' },
-    ],
-  },
-  {
-    title: 'Libraries',
-    skills: [
-      { name: 'Socket.IO', icon: SiSocketdotio, color: '#010101' },
-      { name: 'Sharp', icon: FaCode, color: '#6c63ff' },
-      { name: 'Prisma', icon: FaDatabase, color: '#2d3748' },
-    ],
-  },
-  {
-    title: 'Tools',
-    skills: [
-      { name: 'Git', icon: FaGit, color: '#f05032' },
-      { name: 'GitHub', icon: FaGit, color: '#ffffff' },
-      { name: 'Postman', icon: SiPostman, color: '#ff6c37' },
-      { name: 'VS Code', icon: FaCode, color: '#007acc' },
-    ],
-  },
-  {
-    title: 'Core CS',
-    skills: [
-      { name: 'DSA', icon: FaCode, color: '#6c63ff' },
-      { name: 'OOP', icon: FaCode, color: '#e942f5' },
-      { name: 'DBMS', icon: FaDatabase, color: '#00b4d8' },
-      { name: 'REST API Design', icon: FaCode, color: '#68a063' },
-    ],
-  },
-];
+export const heroIntro = `Full stack engineer focused on clean architecture, fast interfaces, and systems that hold up under real usage. Currently exploring how LLMs and agents fit into everyday developer tools.`;
 
 export const projects = [
   {
-    title: 'PixelFlow',
-    description: 'A performance-focused image delivery platform that makes media-heavy apps feel faster through smart resizing, format negotiation, and on-demand transformations.',
-    challenge: 'Media-heavy products need fast delivery without sacrificing quality or developer control.',
-    outcome: 'Built a high-throughput image pipeline that improves delivery efficiency and simplifies content handling for scale.',
-    tech: ['React.js', 'Express.js', 'Redis', 'Sharp'],
-    features: [
-      'High-performance delivery pipeline with Sharp, Redis, and object storage for optimized image variants',
-      'Secure REST APIs with JWT, Google OAuth 2.0, API key authentication, rate limiting, and input validation',
-      'React dashboard with batch uploads, analytics, folder management, image search, and real-time upload progress',
+    slug: 'devpilot',
+    title: 'DevPilot',
+    tagline:
+      'AI development workspace for repository understanding and coding-solution improvement.',
+    status: 'In development',
+    year: '2026',
+    featured: true,
+    theme: 'dark',
+    visual: 'repo',
+    problem:
+      'Context in a large repository is spread across files, history and conventions. Rebuilding that context by hand is the slow part of making a change.',
+    approach:
+      'DevPilot is being designed as a workspace that maps a repository, retrieves the parts a task actually touches, and keeps them beside the code being edited. Architecture and model choices are still open — nothing below is shipped yet.',
+    outcome: 'In development. No production usage, metrics or benchmarks to report yet.',
+    notes: [
+      'Positioning and scope come from the product brief; every capability listed here is a design target, not a released feature.',
+      'No public repository or live demo yet — links are added once the first working build exists.',
     ],
-    github: 'https://github.com/Aayush3238/pixelflow',
-    live: 'https://pixel-flow-ashy.vercel.app/dashboard',
-    image: null,
+    features: [
+      { text: 'Repository map — browse a codebase as a connected structure', status: 'planned' },
+      { text: 'Context retrieval — surface the files a task actually touches', status: 'planned' },
+      { text: 'Solution review — check a proposed change against existing conventions', status: 'planned' },
+    ],
+    tech: [],
+    github: '',
+    live: '',
   },
   {
-    title: 'HomeHive',
-    description: 'A secure property marketplace built around real-time communication, role-based workflows, and a smooth experience for buyers, owners, and admins.',
-    challenge: 'Property platforms need strong trust, fast communication, and role-aware workflows across different user types.',
-    outcome: 'Created a full marketplace experience with encrypted chat, location-aware search, and streamlined request flows.',
-    tech: ['Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Socket.IO'],
-    features: [
-      'Encrypted real-time messaging using Socket.IO with RSA-OAEP encryption',
-      'Cloud-based media pipeline using Cloudinary with automatic compression and responsive srcset generation',
-      'Custom session store, geospatial search, and buy-request workflows with PostgreSQL and Prisma',
+    slug: 'codelens',
+    title: 'CodeLens',
+    tagline:
+      'AI coaching platform for competitive programming: code analysis, chat guidance and revision plans over your own solving history.',
+    status: 'Built',
+    year: '2026',
+    featured: false,
+    theme: 'dark',
+    visual: 'coach',
+    problem:
+      'Practice is fragmented — submissions, weak topics and revision plans live in different places, so progress is hard to act on.',
+    approach:
+      'Built a full-stack coach: LeetCode history is synced and stored through Prisma on PostgreSQL, cached in Redis, and analysed with the OpenAI API. The client is React 18 with Zustand and TanStack Query so sync state stays predictable.',
+    outcome:
+      'Shipped as a documented application: AI analysis and chat, dashboards, revision plans and OAuth login, with a 13-model schema and Swagger API documentation.',
+    notes: [
+      'Refresh-token auth, rate limiting and audit logging are part of the backend contract.',
+      'Charts and mastery tracking run on data the app itself records — no external analytics.',
     ],
+    features: [
+      { text: 'Code analysis with complexity, pattern and optimisation feedback', status: 'working' },
+      { text: 'AI chat coach with stored conversations and generated revision plans', status: 'working' },
+      { text: 'LeetCode sync, GitHub stats and Google/GitHub OAuth login', status: 'working' },
+      { text: 'Dashboards for topic mastery, difficulty progression and submissions', status: 'working' },
+      { text: 'PostgreSQL + Prisma schema, Redis cache, Zod validation, Swagger docs', status: 'working' },
+    ],
+    tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Redis', 'OpenAI API', 'Tailwind CSS'],
+    github: 'https://github.com/Aayush3238/CodeLens',
+    live: '',
+  },
+  {
+    slug: 'homehive',
+    title: 'HomeHive',
+    tagline:
+      'A secure property marketplace built around real-time communication, role-based workflows, and a smooth experience for buyers, owners, and admins.',
+    status: 'Live',
+    year: '2025',
+    featured: false,
+    theme: 'light',
+    visual: 'marketplace',
+    problem:
+      'Property platforms need strong trust, fast communication, and role-aware workflows across different user types.',
+    approach:
+      'Created a full marketplace experience with encrypted chat, location-aware search, and streamlined request flows.',
+    outcome:
+      'Deployed production marketplace handling real-time messaging, media pipelines, and geospatial search.',
+    notes: [
+      'Session state lives in a custom store so authentication survives reconnects.',
+      'Media is processed once on upload and served as responsive variants.',
+    ],
+    features: [
+      {
+        text: 'Encrypted real-time messaging using Socket.IO with RSA-OAEP encryption',
+        status: 'working',
+      },
+      {
+        text: 'Cloud media pipeline using Cloudinary with compression and responsive srcset generation',
+        status: 'working',
+      },
+      {
+        text: 'Custom session store, geospatial search and buy-request workflows with PostgreSQL and Prisma',
+        status: 'working',
+      },
+    ],
+    tech: ['Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Socket.IO', 'Cloudinary'],
     github: 'https://github.com/Aayush3238/homehive',
     live: 'https://homehive-w3xm.onrender.com/',
-    image: null,
+  },
+  {
+    slug: 'pixelflow',
+    title: 'PixelFlow',
+    tagline:
+      'A performance-focused image delivery platform that makes media-heavy apps feel faster through smart resizing, format negotiation, and on-demand transformations.',
+    status: 'Live',
+    year: '2025',
+    featured: false,
+    theme: 'light',
+    visual: 'media',
+    problem: 'Media-heavy products need fast delivery without sacrificing quality or developer control.',
+    approach:
+      'Built a high-throughput image pipeline that improves delivery efficiency and simplifies content handling for scale.',
+    outcome: 'Production image platform with authenticated APIs and a full management dashboard.',
+    notes: [
+      'Variants are generated once and reused — the hot path is a cache lookup.',
+      'Three authentication layers: session JWT, Google OAuth and scoped API keys.',
+    ],
+    features: [
+      {
+        text: 'Delivery pipeline with Sharp, Redis and object storage for optimized image variants',
+        status: 'working',
+      },
+      {
+        text: 'REST APIs with JWT, Google OAuth 2.0, API keys, rate limiting and input validation',
+        status: 'working',
+      },
+      {
+        text: 'React dashboard with batch uploads, analytics, folders, search and upload progress',
+        status: 'working',
+      },
+    ],
+    tech: ['React.js', 'Express.js', 'Redis', 'Sharp'],
+    github: 'https://github.com/Aayush3238/pixelflow',
+    live: 'https://pixel-flow-ashy.vercel.app/dashboard',
+  },
+  {
+    slug: 'aicsvimporter',
+    title: 'AiCSVImporter',
+    tagline:
+      'AI-powered CSV importer that maps messy lead spreadsheets into a fixed CRM schema using Gemini structured output.',
+    status: 'Built',
+    year: '2026',
+    featured: false,
+    theme: 'light',
+    visual: 'csv',
+    problem:
+      'Leads arrive as arbitrary CSV columns that never match the CRM schema, and manual cleanup does not scale.',
+    approach:
+      'The browser previews and validates the file locally, then an Express backend splits rows into batches and asks Gemini for JSON against an explicit schema — validating and sanitising every response, and skipping rows it cannot map instead of guessing.',
+    outcome:
+      'Feature-complete, stateless import flow: batched processing, imported/skipped reporting, and CSV plus Excel export. No database, auth or background jobs.',
+    notes: [
+      'Prompt contract is explicit: do not invent values, keep the original row index, skip only rows with neither email nor mobile.',
+      'Shared constants keep frontend and backend agreed on the same CRM fields and enums.',
+    ],
+    features: [
+      { text: 'Local preview and validation before any backend call', status: 'working' },
+      { text: 'Batched Gemini mapping with retry, validation and sanitisation', status: 'working' },
+      { text: 'Imported/skipped report with CSV and Excel download', status: 'working' },
+    ],
+    tech: ['Next.js', 'Node.js', 'Express.js', 'Tailwind CSS', 'Gemini API', 'Papa Parse'],
+    github: 'https://github.com/Aayush3238/AiCSVImporter',
+    live: '',
   },
 ];
 
@@ -188,7 +204,8 @@ export const experience = [
     company: 'Nexera',
     date: 'Feb 2026 – Present',
     location: 'Remote',
-    description: 'Contributing to the development of a scalable full-stack learning platform using React.js, Next.js, Node.js, Express.js, and PostgreSQL.',
+    description:
+      'Contributing to the development of a scalable full-stack learning platform using React.js, Next.js, Node.js, Express.js, and PostgreSQL.',
     bullets: [
       'Implemented secure Google OAuth authentication and session management for seamless user login and access control.',
       'Developed backend APIs and frontend workflows for the course doubt management system, enabling efficient student-mentor interaction.',
@@ -207,26 +224,104 @@ export const education = [
   },
 ];
 
-export const achievements = [
+export const skillGroups = [
   {
-    title: 'Software Developer Intern at Nexera',
-    desc: 'Contributing to a scalable full-stack learning platform with modern web technologies.',
+    id: 'languages',
+    title: 'Languages & fundamentals',
+    items: ['C++', 'JavaScript', 'Python', 'SQL', 'Data Structures & Algorithms', 'OOP', 'DBMS'],
   },
   {
-    title: 'Full Stack Project Portfolio',
-    desc: 'Built and deployed multiple production-grade projects including PixelFlow and HomeHive.',
+    id: 'frontend',
+    title: 'Frontend',
+    items: ['React.js', 'Next.js', 'HTML5', 'CSS3', 'Tailwind CSS', 'Responsive UI'],
   },
   {
-    title: 'Strong DSA Foundation',
-    desc: 'Proficient in Data Structures & Algorithms, OOP, DBMS, and REST API Design.',
+    id: 'backend',
+    title: 'Backend & data',
+    items: [
+      'Node.js',
+      'Express.js',
+      'REST APIs',
+      'JWT Auth',
+      'PostgreSQL',
+      'MongoDB',
+      'Redis',
+      'Prisma',
+      'Socket.IO',
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'AI integration',
+    note: 'Growing area — driven by shipped AI features and DevPilot.',
+    items: [
+      'OpenAI API',
+      'Gemini API',
+      'Structured LLM output',
+      'Agentic workflows (exploring)',
+      'Retrieval over codebases (exploring)',
+    ],
   },
 ];
 
-export const techMarquee = [
-  'React.js', 'Node.js', 'Express.js', 'MongoDB', 'PostgreSQL',
-  'Redis', 'Socket.IO', 'TypeScript', 'Python', 'C++',
-  'Tailwind CSS', 'Prisma', 'Git', 'REST APIs', 'JWT',
+export const principles = [
+  {
+    title: 'Backend clarity first',
+    desc: 'Strong systems begin with clean data handling, reliable contracts, and predictable behavior.',
+  },
+  {
+    title: 'Keep the experience smooth',
+    desc: 'A polished interface is only valuable when the underlying flow is fast, resilient, and intuitive.',
+  },
+  {
+    title: 'Ship with purpose',
+    desc: 'Features should solve real friction and improve the user journey, not add surface-level complexity.',
+  },
+  {
+    title: 'Measure, then optimize',
+    desc: 'Profiling beats guesswork. I find the actual bottleneck before touching performance.',
+  },
 ];
 
-export const certifications = [];
-export const codingProfiles = [];
+/* Interactive workflow sketch shown in the Lab section.
+   These are design targets for DevPilot — not a running system. */
+export const workflowStages = [
+  {
+    id: 'map',
+    index: '01',
+    label: 'Map',
+    title: 'Read the repository',
+    desc: 'Parse structure, entry points and dependencies into a navigable graph of the codebase.',
+    logs: ['$ devpilot map ./repo', '→ indexing files', '→ graph built', '→ conventions detected'],
+  },
+  {
+    id: 'retrieve',
+    index: '02',
+    label: 'Retrieve',
+    title: 'Pull only what matters',
+    desc: 'For a given task, retrieve the files, symbols and prior decisions it actually touches.',
+    logs: ['$ devpilot ctx "fix auth refresh"', '→ 9 files matched', '→ 3 symbols in scope', '→ context packed: 6.2k tokens'],
+  },
+  {
+    id: 'plan',
+    index: '03',
+    label: 'Plan',
+    title: 'Draft against conventions',
+    desc: 'Propose an approach measured against the repository’s existing patterns instead of generic advice.',
+    logs: ['$ devpilot plan', '→ reading session/store.js', '→ 2 similar changes found', '→ plan drafted (concept)'],
+  },
+  {
+    id: 'review',
+    index: '04',
+    label: 'Review',
+    title: 'Check before it lands',
+    desc: 'Compare the proposed change against tests, contracts and review rules before anything is merged.',
+    logs: ['$ devpilot review', '→ contract check: pending', '→ tests: not run', '→ status: concept only'],
+  },
+];
+
+export const socials = [
+  { label: 'GitHub', url: personalInfo.github, key: 'github' },
+  { label: 'LinkedIn', url: personalInfo.linkedin, key: 'linkedin' },
+  { label: 'LeetCode', url: personalInfo.leetcode, key: 'leetcode' },
+];

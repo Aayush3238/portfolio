@@ -1,160 +1,165 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { projects } from '../../data/portfolioData';
-import ScrambleText from '../ScrambleText/ScrambleText';
+import Reveal from '../Reveal/Reveal';
+import ProjectVisual from '../ProjectVisual/ProjectVisual';
+import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
 import './Projects.css';
 
-function ProjectDetail({ project, index, isActive }) {
+const statusClass = (status) =>
+  `status ${status === 'Live' ? 'status-live' : ''} work-status`;
+
+function Featured({ project, scrollToSection }) {
   return (
-    <motion.div
-      className={`project-detail ${isActive ? 'active' : ''}`}
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-40%' }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <div className="project-detail-header">
-        <span className="project-index">0{index + 1}</span>
-        <h3 className="project-detail-title">{project.title}</h3>
-      </div>
-      <p className="project-detail-desc">{project.description}</p>
+    <Reveal className="work-featured">
+      <article className="featured">
+        <header className="featured-head">
+          <span className="mono featured-kicker">Priority build</span>
+          <span className={statusClass(project.status)}>{project.status}</span>
+        </header>
 
-      <div className="project-case-study-grid">
-        <div className="project-case-study-card">
-          <span className="project-case-label">Challenge</span>
-          <p>{project.challenge}</p>
+        <div className="featured-grid">
+          <div className="featured-copy">
+            <span className="featured-index">01</span>
+            <h3 className="featured-title">{project.title}</h3>
+            <p className="featured-tagline">{project.tagline}</p>
+
+            <div className="featured-blocks">
+              <div className="featured-block">
+                <span className="mono featured-label">Problem</span>
+                <p>{project.problem}</p>
+              </div>
+              <div className="featured-block">
+                <span className="mono featured-label">Approach</span>
+                <p>{project.approach}</p>
+              </div>
+            </div>
+
+            <ul className="featured-features">
+              {project.features.map((feature) => (
+                <li key={feature.text} data-status={feature.status}>
+                  <span className="mono feature-status">
+                    {feature.status === 'working' ? 'built' : 'planned'}
+                  </span>
+                  {feature.text}
+                </li>
+              ))}
+            </ul>
+
+            <div className="featured-actions">
+              <button className="btn btn-accent" onClick={() => scrollToSection('lab')}>
+                Open the lab
+              </button>
+              <span className="mono featured-note">
+                {project.tech.length ? project.tech.join(' · ') : 'No stack published yet'}
+              </span>
+            </div>
+          </div>
+
+          <div className="featured-visual">
+            <ProjectVisual variant={project.visual} />
+          </div>
         </div>
-        <div className="project-case-study-card">
-          <span className="project-case-label">Outcome</span>
-          <p>{project.outcome}</p>
-        </div>
-      </div>
-
-      {project.features && project.features.length > 0 && (
-        <div className="project-feature-block">
-          <span className="project-feature-title">Highlights</span>
-          <ul className="project-features">
-            {project.features.map((feat, fi) => (
-              <li key={fi}>{feat}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <div className="project-tech">
-        {project.tech.map((t) => (
-          <span key={t} className="project-tech-tag">{t}</span>
-        ))}
-      </div>
-
-      <div className="project-links">
-        <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link">
-          <FaGithub /> Code
-        </a>
-        {project.live ? (
-          <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-link project-link-live">
-            <FaExternalLinkAlt /> Live Demo
-          </a>
-        ) : (
-          <span className="project-link project-link-disabled">
-            <FaExternalLinkAlt /> Live Coming Soon
-          </span>
-        )}
-      </div>
-    </motion.div>
+      </article>
+    </Reveal>
   );
 }
 
-export default function Projects() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
-  const [activeIndex, setActiveIndex] = useState(0);
+function Row({ project, index, flip, navigate }) {
+  return (
+    <Reveal as="article" className={`work-row ${flip ? 'work-row-flip' : ''}`}>
+      <span className="work-row-num">{String(index).padStart(2, '0')}</span>
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const details = document.querySelectorAll('.project-detail');
-      details.forEach((el, i) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.3) {
-          setActiveIndex(i);
-        }
-      });
-    };
+      <div className="work-row-body">
+        <div className="work-row-meta">
+          <span className={statusClass(project.status)}>{project.status}</span>
+          <span className="mono work-row-year">{project.year}</span>
+        </div>
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+        <h3 className="work-row-title">{project.title}</h3>
+        <p className="work-row-tagline">{project.tagline}</p>
+        <p className="work-row-problem">{project.problem}</p>
+
+        {project.tech.length > 0 && (
+          <ul className="work-row-tech">
+            {project.tech.map((tech) => (
+              <li key={tech} className="tag">
+                {tech}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="work-row-actions">
+          <button className="arrow-link" onClick={() => navigate(`#/project/${project.slug}`)}>
+            Case study <FiArrowUpRight size={14} />
+          </button>
+          {project.github && (
+            <a
+              className="arrow-link"
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub <FiGithub size={14} />
+            </a>
+          )}
+          {project.live && (
+            <a
+              className="arrow-link"
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Live <FiArrowUpRight size={14} />
+            </a>
+          )}
+        </div>
+      </div>
+
+      <div className="work-row-visual">
+        <ProjectVisual variant={project.visual} />
+      </div>
+    </Reveal>
+  );
+}
+
+export default function Projects({ navigate, scrollToSection }) {
+  const featured = projects.filter((project) => project.featured);
+  const rest = projects.filter((project) => !project.featured);
 
   return (
-    <section id="projects" className="section projects" ref={ref}>
+    <section id="work" className="section work">
       <div className="container">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-        >
-          My <span className="gradient-text"><ScrambleText text="Projects" delay={100} /></span>
-        </motion.h2>
-        <motion.p
-          className="section-subtitle"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          Some of the things I&apos;ve built
-        </motion.p>
+        <header className="section-head">
+          <Reveal>
+            <span className="section-index">
+              <b>01</b> Selected work
+            </span>
+            <h2 className="section-title">
+              Shipped, built, and <em>in progress.</em>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="section-note">
+              Two products live in production, two AI tools built end to end, and one platform
+              still being designed. Each case study states what actually works.
+            </p>
+          </Reveal>
+        </header>
 
-        <div className="projects-showcase">
-          <div className="projects-scroll-list">
-            {projects.map((project, i) => (
-              <ProjectDetail
-                key={i}
-                project={project}
-                index={i}
-                isActive={activeIndex === i}
-              />
-            ))}
-          </div>
+        <div className="work-list">
+          {featured.map((project) => (
+            <Featured key={project.slug} project={project} scrollToSection={scrollToSection} />
+          ))}
 
-          <div className="projects-sticky-preview">
-            <div className="preview-frame">
-              <div className="preview-frame-header">
-                <div className="preview-dots">
-                  <span className="dot dot-red" />
-                  <span className="dot dot-yellow" />
-                  <span className="dot dot-green" />
-                </div>
-                <span className="preview-url">{projects[activeIndex]?.live ? new URL(projects[activeIndex].live).hostname : 'localhost'}</span>
-              </div>
-              <div className="preview-body">
-                {projects[activeIndex]?.live ? (
-                  <iframe
-                    key={activeIndex}
-                    src={projects[activeIndex].live}
-                    title={`${projects[activeIndex].title} preview`}
-                    className="preview-iframe"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                  />
-                ) : (
-                  <div className="preview-placeholder">
-                    <FaExternalLinkAlt />
-                    <span>No live preview</span>
-                  </div>
-                )}
-              </div>
-              <div className="preview-project-indicator">
-                {projects.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`indicator-dot ${activeIndex === i ? 'active' : ''}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+          {rest.map((project, i) => (
+            <Row
+              key={project.slug}
+              project={project}
+              index={i + 2}
+              flip={i % 2 === 1}
+              navigate={navigate}
+            />
+          ))}
         </div>
       </div>
     </section>

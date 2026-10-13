@@ -1,0 +1,183 @@
+.sysmap {
+  background: var(--paper-soft);
+  border: 1px solid var(--line-strong);
+  display: flex;
+  flex-direction: column;
+}
+
+.sysmap-head,
+.sysmap-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.sysmap-head {
+  border-bottom: 1px solid var(--line);
+}
+
+.sysmap-foot {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.sysmap-title {
+  color: var(--ink);
+}
+
+.sysmap-chip {
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+  padding: 4px 8px;
+}
+
+.sysmap-canvas {
+  padding: 6px 6px 0;
+}
+
+.sysmap-canvas svg {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- links ---------- */
+
+.sysmap-link-group {
+  opacity: 0;
+  animation: sysmap-fade 0.7s var(--ease) forwards;
+}
+
+.sysmap-link {
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+
+.sysmap-link-loop {
+  stroke-dasharray: 4 4;
+  opacity: 0.55;
+}
+
+.sysmap-pulse {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 0.1 0.9;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+.sysmap-link-group.is-lit .sysmap-link {
+  stroke: var(--accent);
+}
+
+.sysmap-link-group.is-lit .sysmap-pulse {
+  opacity: 1;
+  animation: sysmap-travel 1.6s linear infinite;
+}
+
+/* ---------- nodes ---------- */
+
+.sysmap-node {
+  cursor: crosshair;
+  opacity: 0;
+  animation: sysmap-fade 0.6s var(--ease) forwards;
+}
+
+.sysmap-node-shadow {
+  fill: var(--ink);
+}
+
+.sysmap-node-box {
+  fill: var(--paper-soft);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  transition: fill 0.28s var(--ease), stroke 0.28s var(--ease);
+}
+
+.sysmap-node-index {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  fill: var(--muted);
+  transition: fill 0.28s var(--ease);
+}
+
+.sysmap-node-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  fill: var(--ink);
+  transition: fill 0.28s var(--ease);
+}
+
+.sysmap-node-sub {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  fill: var(--muted);
+  transition: fill 0.28s var(--ease);
+}
+
+.sysmap-node.is-active .sysmap-node-box,
+.sysmap-node:hover .sysmap-node-box,
+.sysmap-node:focus-visible .sysmap-node-box {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+.sysmap-node.is-active .sysmap-node-index,
+.sysmap-node.is-active .sysmap-node-label,
+.sysmap-node.is-active .sysmap-node-sub,
+.sysmap-node:hover .sysmap-node-index,
+.sysmap-node:hover .sysmap-node-label,
+.sysmap-node:hover .sysmap-node-sub,
+.sysmap-node:focus-visible .sysmap-node-index,
+.sysmap-node:focus-visible .sysmap-node-label,
+.sysmap-node:focus-visible .sysmap-node-sub {
+  fill: var(--paper);
+}
+
+.sysmap-node:focus-visible {
+  outline: none;
+}
+
+.sysmap-node:focus-visible .sysmap-node-box {
+  stroke-width: 2.4;
+}
+
+.sysmap-note {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+
+@keyframes sysmap-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sysmap-travel {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sysmap-pulse {
+    display: none;
+  }
+}
