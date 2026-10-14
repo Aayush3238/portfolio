@@ -1,6 +1,6 @@
 /* =========================================================
    DESIGN SYSTEM — "Editorial Paper / Vermilion"
-   Near-black ink, warm off-white paper, one vermilion accent.
+   Near-black ink, dim oat paper, one vermilion accent.
    Bodoni Moda (display) · Hanken Grotesk (body) · JetBrains Mono (labels)
    ========================================================= */
 
@@ -13,12 +13,12 @@
 }
 
 :root {
-  --paper: #f2eee4;
-  --paper-deep: #e9e3d5;
-  --paper-soft: #f8f5ee;
+  --paper: #e7e0cf;
+  --paper-deep: #dcd3bc;
+  --paper-soft: #f0ebdc;
   --ink: #0c0c0d;
-  --ink-soft: #35342f;
-  --muted: #6d6a60;
+  --ink-soft: #33322d;
+  --muted: #625f55;
   --line: rgba(12, 12, 13, 0.16);
   --line-strong: rgba(12, 12, 13, 0.42);
   --accent: #e8451f;
@@ -27,9 +27,9 @@
 
   --panel: #0c0c0d;
   --panel-soft: #17171a;
-  --panel-text: #f2eee4;
-  --panel-muted: #97938a;
-  --panel-line: rgba(242, 238, 228, 0.16);
+  --panel-text: #e7e0cf;
+  --panel-muted: #9a958a;
+  --panel-line: rgba(231, 224, 207, 0.16);
 
   --font-display: 'Bodoni Moda', 'Times New Roman', serif;
   --font-body: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
