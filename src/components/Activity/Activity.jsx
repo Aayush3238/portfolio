@@ -22,13 +22,14 @@ function buildWeeks(cellOf, endDate) {
   const last = startOfWeek(endDate);
   const cursor = new Date(last);
   cursor.setDate(cursor.getDate() - (WEEKS - 1) * 7);
+  const todayIso = isoOf(endDate);
 
   const weeks = [];
   while (cursor <= last) {
     const week = [];
     for (let i = 0; i < 7; i += 1) {
       const date = isoOf(cursor);
-      week.push({ date, ...cellOf(date) });
+      if (date <= todayIso) week.push({ date, ...cellOf(date) });
       cursor.setDate(cursor.getDate() + 1);
     }
     weeks.push(week);
