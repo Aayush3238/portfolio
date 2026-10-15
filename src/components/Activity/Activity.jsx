@@ -7,7 +7,6 @@ const GH_API = `https://github-contributions-api.jogruber.de/v4/${personalInfo.g
 const LC_API = `https://leetcode-sub-endpoint.vercel.app/leetcode/${personalInfo.leetcodeUsername}`;
 
 const WEEKS = 53;
-const MS_DAY = 86_400_000;
 
 const pad = (n) => String(n).padStart(2, '0');
 const isoOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
@@ -131,18 +130,14 @@ function Heatmap({ weeks, tone, label, caption, stats, username, href, error, lo
               </div>
 
               <div className="act-weeks">
-                {weeks.map((week, col) => (
+                {grid.map((week, col) => (
                   <div key={col} className="act-week">
                     {week.map((cell) => (
                       <span
                         key={cell.date}
                         className="act-cell"
                         data-level={loading ? 0 : cell.level}
-                        title={
-                          loading
-                            ? undefined
-                            : `${cell.count} on ${cell.date}`
-                        }
+                        title={loading ? undefined : `${cell.count} on ${cell.date}`}
                       />
                     ))}
                   </div>
@@ -155,7 +150,7 @@ function Heatmap({ weeks, tone, label, caption, stats, username, href, error, lo
 
       {!loading && !error && (
         <footer className="act-foot">
-          <span className="mono act-foot-note">{caption}</span>
+          <span className="mono act-foot-note">Last 12 months · live from the platform</span>
           <span className="act-legend mono" aria-hidden="true">
             Less
             {[0, 1, 2, 3, 4].map((l) => (
