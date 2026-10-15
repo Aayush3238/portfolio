@@ -57,7 +57,7 @@ export default function Contact() {
       <div className="container">
         <Reveal>
           <span className="section-index">
-            <b>05</b> Contact
+              <b>06</b> Contact
           </span>
         </Reveal>
 

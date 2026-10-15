@@ -2,7 +2,7 @@ import { FiArrowUp, FiGithub, FiLinkedin, FiArrowUpRight } from 'react-icons/fi'
 import { personalInfo, socials } from '../../data/portfolioData';
 import './Footer.css';
 
-const SECTIONS = ['work', 'lab', 'profile', 'experience', 'contact'];
+const SECTIONS = ['work', 'lab', 'profile', 'experience', 'activity', 'contact'];
 
 export default function Footer({ scrollToSection }) {
   const goTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });

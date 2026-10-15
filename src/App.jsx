@@ -5,6 +5,7 @@ import Projects from './components/Projects/Projects';
 import Lab from './components/Lab/Lab';
 import Profile from './components/Profile/Profile';
 import Experience from './components/Experience/Experience';
+import Activity from './components/Activity/Activity';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import ProjectPage from './components/ProjectPage/ProjectPage';
@@ -92,6 +93,7 @@ export default function App() {
             <Lab />
             <Profile />
             <Experience />
+            <Activity />
             <Contact />
           </>
         )}
