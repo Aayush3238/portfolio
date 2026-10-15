@@ -214,12 +214,19 @@ export default function Activity() {
       if (lcRes.status === 'fulfilled') {
         const byDate = new Map(Object.entries(lcRes.value).map(([k, v]) => [k, Number(v) || 0]));
         let active = 0;
-        let peak = 0;
+        let maxStreak = 0;
+        let run = 0;
+        let prevActive = false;
         const weeks = buildWeeks((key) => {
           const count = byDate.get(key) || 0;
           if (count > 0) {
             active += 1;
-            if (count > peak) peak = count;
+            run = prevActive ? run + 1 : 1;
+            if (run > maxStreak) maxStreak = run;
+            prevActive = true;
+          } else {
+            run = 0;
+            prevActive = false;
           }
           return { count, level: lcLevel(count) };
         }, today);
@@ -228,7 +235,7 @@ export default function Activity() {
           weeks,
           stats: {
             primary: { value: active, label: 'active days' },
-            secondary: { value: peak, label: 'peak in a day' },
+            secondary: { value: maxStreak, label: 'max streak' },
           },
           caption: `LeetCode practice activity for ${personalInfo.leetcodeUsername}, last 12 months`,
         });
